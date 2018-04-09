@@ -1,0 +1,23 @@
+en:
+  model:
+    master_data:
+      model_name: 'Master Data'
+      type:
+        title: 'Master Data Type'
+        process_apply: 'Process Apply'
+        project_type: 'Project Type'
+        kpt_type: 'Kpt Type'
+        status: 'Status'
+        project_status: 'Project Status'
+        project_language: 'Project Language'
+        document_category: 'Document Category'
+      name: 'Name'
+
+    organization:
+      model_name: 'Organization'
+      type:
+        name: 'Organization Name'
+        parent_id: 'Organization Parent'
+        user_id: "Manage"
+      
+

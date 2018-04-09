@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: admin
+  password: "1234567@"
+  host: localhost
+
+development:
+  <<: *default
+  database: TestManagerPro
+  adapter: async
+
+test:
+  <<: *default
+  database: TestManagerPro
+  adapter: async
+
+production:
+  <<: *default
+  database: TestManagerPro

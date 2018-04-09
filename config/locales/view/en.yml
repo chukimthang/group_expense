@@ -1,0 +1,10 @@
+en:
+  view:
+    master_data:
+      name_guideline: 'Name should have less or equal 50 characters'
+    organization:
+      not_delete_organization: 'This organization have child data should not be deleted'
+      not_found: 'Organization not found'
+      add_success: 'Add Organization Success'
+      update_success: 'Update Organization Success'
+      choose_parent: "Choose Organization Parent"

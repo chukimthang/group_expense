@@ -1,0 +1,53 @@
+<header id="header">
+  <div id="logo-group">
+
+    <!-- PLACE YOUR LOGO HERE -->
+    <span id="logo"> <%= image_tag 'logo.png', alt: 'TestManagerPro' %> </span>
+    <!-- END LOGO PLACEHOLDER -->
+
+
+  </div>
+  <%= yield :top_right %>
+
+  <% if current_user && !@simulate_no_user %>
+
+    <!-- pulled right: nav area -->
+    <div class="pull-right">
+
+      <!-- logout button -->
+      <div id="logout" class="btn-header transparent pull-right">
+        <span>
+          <%= link_to(destroy_user_session_path, title: 'Sign Out', data: {action: 'userLogout', 'logout-msg' => 'You can improve your security further after logging out by closing this opened browser'}) do %>
+            <i class="fa fa-sign-out"></i>
+          <% end %>
+        </span>
+      </div>
+      <!-- end logout button -->
+
+      <!-- collapse menu button -->
+      <div id="hide-menu" class="btn-header pull-right">
+        <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+      </div>
+      <!-- end collapse menu -->
+
+      <!-- fullscreen button -->
+      <div id="fullscreen" class="btn-header transparent pull-right">
+        <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+      </div>
+      <!-- end fullscreen button -->
+
+      <!-- #MOBILE -->
+      <!-- Top menu profile link : this shows only when top menu is active -->
+      <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+        <li class="">
+          <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+            <%= image_tag 'avatars/sunny.png', alt: 'John Doe', class: 'online' %>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+    <!-- end pulled right: nav area -->
+  <% end %>
+
+</header>
