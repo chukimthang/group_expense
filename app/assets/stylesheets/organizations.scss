@@ -1,0 +1,53 @@
+#organizations-table {
+  margin-top: 5px;
+
+  tbody, thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  thead {
+    display:block;
+    position: sticky;
+    top:0;
+    margin-left: -2px;
+    margin-right: -2px;
+    margin-bottom: -2px;
+  }
+
+}
+
+#organizations-widget {
+  .wg-content {
+    padding-bottom: 68px;
+  }
+}
+
+#organizations-table-info {
+  margin-top: 15px;
+  .form-control {
+    height: 30px;
+    bottom: 4px;
+    position: relative;
+  }
+}
+
+* {box-sizing:border-box;}
+
+.flash_message {
+  margin-top: 20px;
+}
+
+article.organization-new {
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.widget-body .form-group.button {
+  margin-right: 3px;
+}
+
+.text-danger {
+  color: red;
+}
