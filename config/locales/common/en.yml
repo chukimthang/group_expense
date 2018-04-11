@@ -1,20 +1,24 @@
 en:
   common:
     form:
-      list: 'List'
-      add: 'Add'
-      search: 'Search'
-      cancel: 'Cancel'
-      delete: 'Delete'
-      create: 'Create'
-      resource_list: '%{resource} List'
-      all_selection: '-- All --'
-      total_records: 'Total number of records: %{amount}'
-      items_per_page: 'Items displayed per page'
-      no: 'No' # number
-      action: 'Action'
-      delete_resource: 'Delete %{resource}'
-      delete_confirm_msg: 'Are you sure to delete this record?'
-      add_resource: 'Add %{resource}'
-      error: 'Error'
+      list: "List"
+      add: "Add"
+      update: "Update"
+      search: "Search"
+      cancel: "Cancel"
+      delete: "Delete"
+      create: "Create"
+      resource_list: "%{resource} List"
+      all_selection: "-- All --"
+      total_records: "Total number of records: %{amount}"
+      items_per_page: "Items displayed per page"
+      action: "Action"
+      delete_resource: "Delete %{resource}"
+      delete_confirm_msg: "Are you sure to delete this record?"
+      add_resource: "Add %{resource}"
+      error: "Error"
     message:
+    menu:
+      administration: "Administration"
+    table:
+      empty: "Table Empty"

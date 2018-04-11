@@ -10,22 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409173046) do
+ActiveRecord::Schema.define(version: 20180411155914) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
   end
 
   create_table "expenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.float "price", limit: 24, null: false
     t.text "description"
-    t.integer "product_id", default: 0
     t.integer "category_id", default: 0
     t.integer "group_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180409173046) do
     t.float "saved_money", limit: 24, default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
   end
 
   create_table "incomes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -41,6 +43,7 @@ ActiveRecord::Schema.define(version: 20180409173046) do
     t.integer "group_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -69,6 +72,7 @@ ActiveRecord::Schema.define(version: 20180409173046) do
     t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -96,24 +96,9 @@ Use search to find needed section.
 <!-- MAIN PANEL -->
 <div id="main" role="main">
   <%= yield :ribbon %>
-  <% if notice %>
-    <div class="alert alert-success fade in">
-      <button data-dismiss="alert" class="close">
-        ×
-      </button>
-      <i class="fa-fw fa fa-check"></i>
-      <%= notice %>
-    </div>
-  <% end %>
-  <% if alert %>
-    <div class="alert alert-warning fade in">
-      <button data-dismiss="alert" class="close">
-        ×
-      </button>
-      <i class="fa-fw fa fa-warning"></i>
-      <%= alert %>
-    </div>
-  <% end %>
+  
+  <%= render 'shared/alert' %>
+
   <%= yield %>
 </div>
 <!-- END MAIN PANEL -->

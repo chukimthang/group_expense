@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  class OnlyAjaxRequest
+    def matches?(request)
+      request.xhr?
+    end
+  end
+
   devise_for :users
   root 'home#blank_page'
   
@@ -20,4 +26,7 @@ Rails.application.routes.draw do
 
   # CK editor
   mount Ckeditor::Engine => '/ckeditor'
+
+  resources :categories, except: [:show, :new, :edit]
+  get "categories/:id", to: "categories#get_category_ajax", constraint: OnlyAjaxRequest.new
 end

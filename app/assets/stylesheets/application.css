@@ -23,8 +23,7 @@
  * smart admin css customization
  *= require smart-admin-customization
 
- *= require master-data
- *= require organizations
+ *= require common
 
  *= require_self
  *
