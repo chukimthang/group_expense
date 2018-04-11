@@ -1,0 +1,96 @@
+.label-middle {
+  margin-top: 5px;
+}
+
+#ribbon .breadcrumb a {
+  color: #56bb55 !important;
+  font-size: 1em !important;
+}
+
+.form-horizontal .input {
+  display: block;
+  font-weight: 400;
+  position: relative;
+}
+
+.form-horizontal .icon-append {
+  border-left-style: solid;
+  border-left-width: 1px;
+  padding-left: 3px;
+  right: 5px;
+}
+
+.form-horizontal .icon-append, .form-horizontal .icon-prepend {
+  font-size: 14px;
+  height: 22px;
+  line-height: 22px;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  width: 22px;
+}
+
+.content-header {
+  margin-bottom: 10px;
+}
+
+.total_records {
+  position: relative; 
+  top: 10px;
+}
+
+.items_per_page {
+  position: relative; 
+  top: 3px;
+}
+
+.wp-pagesize {
+  max-width: 100px;
+}
+
+.modal-title {
+  color: #33302F;
+  font-family: arial;
+}
+
+.modal-footer-custom {
+  text-align: left;
+}
+
+.modal-body-custom {
+  padding-bottom: 5px;
+}
+
+.require {
+  color: red;
+}
+
+#category_form_button {
+  margin-left: 7px;
+}
+
+.formError .formErrorContent, .customErrorContent {
+  width: 100% !important;
+  background: transparent !important;
+  color: red !important;
+  border: none !important;
+  box-shadow:none !important;
+  -moz-box-shadow:none !important;
+  -webkit-box-shadow:none !important;
+  padding: 4px 10px 4px 10px;
+  border-radius:0px !important;
+  -moz-border-radius:0px !important;
+  -webkit-border-radius:0px !important;
+  padding: 4px 10px 4px 0px !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+input.error,  input.error:focus{
+  border: 1px solid #ee0101 !important;
+}
+
+label.error {
+  color: #ee0101 !important;
+}

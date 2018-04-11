@@ -1,0 +1,28 @@
+<div class="modal fade" id="modal-deletion" tabindex="-1" role="dialog" 
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" 
+          aria-hidden="true">&times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <%= t('common.form.delete_resource', resource: "Category") %>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <label><%= t('common.form.delete_confirm_msg') %></label>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          <%= t('common.form.cancel') %>
+        </button>
+
+        <a href="#" data-method="delete" class="btn btn-danger" id="btn-confirm-delete">
+          <%= t('common.form.delete') %>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

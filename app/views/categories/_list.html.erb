@@ -1,0 +1,49 @@
+<div class="table-responsive">
+  <table class="custom-table table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="col-sm-1"><%= t("common.form.no") %></th>
+        <th class="col-sm-7"><%= t("model.category.type.name") %></th>
+        <th class="col-sm-3"><%= t("model.category.type.created_date") %></th>
+        <th class="col-sm-1"><%= t("common.form.action") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @categories.any? %>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= @start_count %></td>
+            <td><%= category.name %> </td>
+            <td><%= category.created_at.strftime("%m/%d/%Y") %></td>
+            <td>
+              <a href="#" data-toggle="modal" data-target="#category_form" 
+                class="category_edit" data-id="<%= category.id %>">
+                <i class="fa fa-pencil-square-o custom-action-icon-green
+                  custom-action-icon-edit">
+                </i>
+              </a>
+
+              <a href="#modal-deletion" data-placement="right" 
+                data-toggle="modal" data-id="<%= category.id %>">
+                <i class="glyphicon glyphicon-trash glyphicon" 
+                  data-id="<%= category.id %>"></i>
+              </a>
+            </td>
+          </tr>
+          <% @start_count += 1 %>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" align="center"><%= t("common.table.empty") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="text-align-center custom-kaminari">
+  <% unless @categories.nil? %>
+    <%= paginate @categories %>
+  <% end %>
+</div>

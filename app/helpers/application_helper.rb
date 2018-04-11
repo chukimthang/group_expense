@@ -1,5 +1,8 @@
 # :nodoc:
 module ApplicationHelper
+  DEFAULT_PAGE_INDEX = 1
+  FORMAT_DATE = "%m/%d/%Y"
+
   def left_menu
     left_menu_entries(left_menu_content)
   end
