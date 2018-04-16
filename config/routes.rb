@@ -29,4 +29,7 @@ Rails.application.routes.draw do
 
   resources :categories, except: [:show, :new, :edit]
   get "categories/:id", to: "categories#get_category_ajax", constraint: OnlyAjaxRequest.new
+
+  resources :products, except: [:show, :new, :edit]
+  get "products/:id", to: "products#get_product_ajax", constraint: OnlyAjaxRequest.new
 end

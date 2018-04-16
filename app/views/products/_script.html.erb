@@ -1,0 +1,142 @@
+<% content_for :scripts do %>
+  <script type="application/javascript">
+    var currentScreen = "add";
+
+    $(document).ready(function() {
+      initChosen("category_id");
+      initChosen("search_category_id");
+
+      $("#frm_product").validationEngine({
+        promptPosition: "inline",
+        addSuccessCssClassToField: "no-error",
+        addFailureCssClassToField: "has-error",
+        validateNonVisibleFields: true,
+        prettySelect : true,
+        useSuffix: "_chosen"
+      });
+
+      <% if params[:per_page] %>
+        $("#ddlPageSize").val(<%= params[:per_page] %>);
+      <% else %>
+        $("#ddlPageSize").val(<%= Product::PAGE_SIZE %>);
+      <% end %>
+
+      <% if params[:search_name] %>
+        $("#search_name").val("<%= params[:search_name] %>");
+      <% end %>
+
+      <% if params[:search_category_id] %>
+        $("#search_category_id").val(<%= params[:search_category_id].to_i %>);
+        $("#search_category_id").trigger("chosen:updated");
+      <% end %>
+
+      $(".product_add").on("click", function() {
+        resetForm();
+        $("#product_form_title").html("<%= t('model.product.title.add') %>");
+        $("#product_form_button").html("<%= t('common.form.add') %>");
+      });
+
+      $(".product_edit").on("click", function() {
+        resetForm();
+        $("#product_form_title").html("<%= t('model.product.title.update') %>");
+        $("#product_form_button").html("<%= t('common.form.update') %>");
+
+        var id = $(this).data("id");
+        showFormEdit(id);
+
+        $("#product_form_button").data("product-id", id);
+        currentScreen = "update"
+      });
+
+      $("#product_form_button").on("click", function() {
+        onSave();
+      });
+
+      $(document).on("click", ".glyphicon-trash.glyphicon", function () {
+        var id = $(this).data('id');
+        document.getElementById("btn-confirm-delete").href = "/products/" + id
+      });
+
+      $(".button_search_product").on("click", function() {
+        onSearch();
+      });
+    });
+
+    function resetForm() {
+      $("#name").val("");
+      $("#category_id").val(0);
+      $("#category_id").trigger("chosen:updated");
+    }
+
+    function onChangePageSize(value) {
+      var redirectUrl = "/products?per_page=" + value;
+      window.location.replace(redirectUrl);
+    }
+
+    function showFormEdit(id) {
+      data = {id: id};
+      url = "/products/" + id;
+
+      $.ajax({
+        url: url,
+        data: data,
+        cache: false,
+        type: "GET",
+        success: function(data){
+          $("#name").val(data.name);
+          $("#category_id").val(data.category_id);
+          $("#category_id").trigger("chosen:updated");
+        }
+      });
+    }
+
+    function onSave() {
+      var status = $("#frm_product").validationEngine("validate");
+
+      if(status == false){
+        return status;
+      }
+     
+      var data = $("#frm_product").serialize();
+
+      if (currentScreen == "add"){
+        $.ajax({
+          url: '/products',
+          data: data,
+          cache: false,
+          type: "POST",
+          success: function(data){
+            if (data.status == "false") {
+              $('.customErrorContent.name').html(data.errors.name[0]);
+            } else {
+              window.location.replace("/products");
+            }
+          }
+        });
+      } else {
+        var id = $("#product_form_button").data("product-id");
+
+        $.ajax({
+          url: "/products/" + id,
+          data: data,
+          cache: false,
+          method: "PATCH",
+          dataType: 'json',
+          success: function(data){
+            if (data.status == "false") {
+              $('.customErrorContent.name').html(data.errors.name[0]);
+            } else {
+              window.location.replace("/products");
+            }
+          }
+        });
+      }
+     
+      return true;
+    }
+
+    function onSearch() {
+      $("#frm_search_product").submit();
+    }
+  </script>
+<% end %>
