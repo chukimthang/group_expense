@@ -1,8 +1,5 @@
 # :nodoc:
 module ApplicationHelper
-  DEFAULT_PAGE_INDEX = 1
-  FORMAT_DATE = "%m/%d/%Y"
-
   def left_menu
     left_menu_entries(left_menu_content)
   end
@@ -128,12 +125,38 @@ module ApplicationHelper
   end
 
   def left_menu_content
-    [
+    sidebar_menus = [
       {
         href: root_path,
         title: _('dashboard'),
         content: "<i class='fa fa-lg fa-fw fa-home'></i> <span class='menu-item-parent'>" + _('Dashboard') + "</span>",
       }
     ]
+
+    utility_children = Array.new
+
+    utility_children.push({
+      href: categories_path,
+      title: _("#{t('model.category.controller_name')}"),
+      content: "<i class='fa fa-tasks'></i> <span class='menu-item-parent'>" + _("#{t('model.category.controller_name')}") + "</span>",
+      controller: 'categories'
+    })
+
+    utility_children.push({
+      href: products_path,
+      title: _("#{t('model.product.controller_name')}"),
+      content: "<i class='fa fa-product-hunt'></i> <span class='menu-item-parent'>" + _("#{t('model.product.controller_name')}") + "</span>",
+      controller: 'products'
+    })
+
+    utility_menus = Array.new
+
+    utility_menus.push({
+      href: '#',
+      title: _("#{t('view.menu.utility')}"),
+      content: "<i class='fa fa-cogs fa-lg'></i> <span class='menu-item-parent'>" + _("#{t('view.menu.utility')}") + "</span>",
+      children: utility_children
+    })
+    sidebar_menus = sidebar_menus | utility_menus
   end
 end

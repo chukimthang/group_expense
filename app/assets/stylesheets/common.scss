@@ -94,3 +94,21 @@ input.error,  input.error:focus{
 label.error {
   color: #ee0101 !important;
 }
+
+.custom-chosen {
+  .chosen-container-single, .chosen-container-multi {
+    width: 100% !important;
+  }
+
+  .chosen-container-single .chosen-search {
+    background: none;
+  }
+
+  .chosen-container-single .chosen-single {
+    width: 100%;
+    padding: 4px 0px 0px 15px !important;
+    height: 32px !important;
+    line-height: 21px !important;
+    border-radius: 0px !important;
+  }
+}

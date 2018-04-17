@@ -2,6 +2,7 @@ en:
   model:
     category:
       model_name: "Category"
+      controller_name: "Categories"
       type:
         name: "Name"
         created_at: "Created Date"
@@ -9,4 +10,19 @@ en:
         add: "Add Category"
         update: "Update Category"
         
+    product:
+      model_name: "Product"
+      controller_name: "Products"
+      type:
+        name: "Product Name"
+        category_id: "Category"
+      title:
+        list: "List Product"
+        add: "Add Product"
+        update: "Update Product"
+      message:
+        not_found: "Product not found"
+        add_success: "Product was successfully created"
+        update_success: "Product was successfully updated"
+        deleted_success: "Product was successfully deleted"
 

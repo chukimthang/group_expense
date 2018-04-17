@@ -40,3 +40,4 @@ gem 'devise'
 gem 'jQuery-Validation-Engine-rails'
 gem 'gettext_i18n_rails'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'chosen-rails'

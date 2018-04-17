@@ -1,0 +1,56 @@
+<div class="modal fade" id="product_form" tabindex="-1" role="dialog" 
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+
+        <h5 class="modal-title" id="product_form_title">
+          <%= t("model.product.title.add") %>
+        </h5>
+      </div>
+
+      <%= form_with model: Product, :html=> {:class => "form-horizontal", :id => "frm_product"} do |f| %>
+        <div class="modal-body modal-body-custom">
+          <div class="form-group">
+            <div class="col-md-3 col-xs-3 control-label">
+              <%= t("model.product.type.name")%>
+              <span class="require">(*)</span>
+            </div>
+
+            <div class="col-md-7 col-xs-7">
+              <%= f.text_field :name, {class: "form-control validate[required, maxSize[100]]", 
+                id: "name", placeholder: t("model.product.type.name")} %>
+              <div class="customErrorContent name"></div>
+            </div>
+          </div>
+
+          <div class="form-group custom-chosen">
+            <div class="col-md-3 col-xs-3 control-label">
+              <%= t("model.product.type.category_id")%>
+              <span class="require">(*)</span>
+            </div>
+
+            <div class="col-md-7 col-xs-7">
+              <%= f.collection_select :category_id, @categories, :id, :name.to_s, {prompt: false},
+                {class: "chosen-select form-control validate[required]", id: "category_id" } %>
+              <div class="customErrorContent category_id"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer modal-footer-custom">
+          <div class="col-md-offset-3">
+            <button type="button" class="btn custom-btn-green btn-submit" id="product_form_button">
+              <%= t("common.form.add") %></button>
+            <button type="button" class="btn btn-default cancel" data-dismiss="modal">
+              <%= t("common.form.cancel") %>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

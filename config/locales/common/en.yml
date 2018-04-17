@@ -20,5 +20,6 @@ en:
     message:
     menu:
       administration: "Administration"
+      utility: "Utilities"
     table:
       empty: "Table Empty"

@@ -1,0 +1,62 @@
+<% content_for :ribbon do %>
+  <div id="ribbon">
+    <i class="fa fa-lg fa-fw fa-home"></i>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= categories_path %>">
+          <%= t("model.category.model_name") %>
+        </a>
+      </li>
+      <li><%= t("common.form.list") %></li>
+    </ol>
+  </div>
+<% end %>
+
+<article class="col-sm-12 col-md-12 col-lg-12">
+  <div class="custom-widget">
+    <header role="heading">
+      <div class="col-xs-8 title">
+        <h5>
+          <%= t("model.product.title.list") %>
+        </h5>
+      </div>
+
+      <div class="col-xs-4">
+        <span class="btn custom-btn-green btn-add pull-right product_add" 
+          data-toggle="modal" data-target="#product_form">
+          <%= t("common.form.add") %>
+        </span>
+      </div>
+    </header>
+
+    <div class="wg-content">
+      <%= render "products/search" %>
+
+      <div class="row listing-container">
+        <div class="row content-header">
+          <div class="col-sm-4 pull-left total_records">
+            <%= t("common.form.total_records", amount: @total_records) %>
+          </div>
+
+          <div class="col-sm-4 pull-right">
+            <div class="row items_per_page">
+              <div class="col-sm-8 text-align-right label-middle">
+                <%= t("common.form.items_per_page") %>
+              </div>
+
+              <div class="col-sm-4 pull-right wp-pagesize">
+                <%= render "shared/pagesize" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%= render partial: "products/list" %>
+    </div>
+  </div>
+</article>
+
+<%= render partial: "products/form" %>
+<%= render partial: "shared/deletion" %>
+<%= render partial: "products/script" %>

@@ -26,3 +26,6 @@
 
 // MAIN APP JS FILE
 //= require app.seed
+
+//= require common
+//= require chosen-jquery
