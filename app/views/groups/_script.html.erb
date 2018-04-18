@@ -1,0 +1,141 @@
+<% content_for :scripts do %>
+  <script type="application/javascript">
+    var currentScreen = "add";
+
+    $(document).ready(function() {
+      $("#frm_group").validationEngine({
+        promptPosition: "inline",
+        addSuccessCssClassToField: "no-error",
+        addFailureCssClassToField: "has-error",
+        validateNonVisibleFields: true
+      });
+
+      <% if params[:per_page] %>
+        $("#ddlPageSize").val(<%= params[:per_page] %>);
+      <% else %>
+        $("#ddlPageSize").val(<%= Group::PAGE_SIZE %>);
+      <% end %>
+
+      $(".group_add").on("click", function() {
+        resetForm();
+
+        $("#group_form_title").html("<%= t('model.group.title.add') %>");
+        $("#group_form_button").html("<%= t('common.form.add') %>");
+      });
+
+      $(".group_edit").on("click", function() {
+        resetForm();
+
+        $("#group_form_title").html("<%= t('model.group.title.update') %>");
+        $("#group_form_button").html("<%= t('common.form.update') %>");
+
+        var id = $(this).data("id");
+        showFormEdit(id);
+
+        $("#group_form_button").data("group-id", id);
+        currentScreen = "update"
+      });
+
+      $("#group_form_button").on("click", function() {
+        onSave();
+      });
+
+      $(document).on("click", ".glyphicon-trash.glyphicon", function () {
+        var id = $(this).data('id');
+        document.getElementById("btn-confirm-delete").href = "/groups/" + id
+      });
+
+      $(".blocked-group").on("click", function() {
+        var id = $(this).data("id");
+        onActive(id);
+      });
+    });
+
+    function resetForm() {
+      $("#group_name").val("");
+    }
+
+    function showFormEdit(id) {
+      data = {id: id};
+      url = "/groups/" + id;
+
+      $.ajax({
+        url: url,
+        data: data,
+        cache: false,
+        type: "GET",
+        success: function(data){
+          $("#group_name").val(data.name);
+        }
+      });
+    }
+
+    function onSave() {
+      var status = $("#frm_group").validationEngine("validate");
+
+      if(status == false){
+        return status;
+      }
+     
+      var data = $("#frm_group").serialize();
+
+      if (currentScreen == "add"){
+        $.ajax({
+          url: '/groups',
+          data: data,
+          cache: false,
+          type: "POST",
+          success: function(data){
+            if (data.status == "false") {
+              $('.customErrorContent.name').html(data.errors.name[0]);
+            } else {
+              window.location.replace("/");
+            }
+          }
+        });
+      } else {
+        var id = $("#group_form_button").data("group-id");
+
+        $.ajax({
+          url: "/groups/" + id,
+          data: data,
+          cache: false,
+          method: "PATCH",
+          dataType: 'json',
+          success: function(data){
+            if (data.status == "false") {
+              $('.customErrorContent.name').html(data.errors.name[0]);
+            } else {
+              window.location.replace("/");
+            }
+          }
+        });
+      }
+     
+      return true;
+    }
+
+    function onChangePageSize(value) {
+      var redirectUrl = "?per_page=" + value;
+      window.location.replace(redirectUrl);
+    }
+
+    function onActive(id) {
+      $.ajax({
+        url: '/groups/blocked/' + id,
+        data: {id: id},
+        cache: false,
+        type: "POST",
+        success: function(data){
+          if (data.status == "true") {
+            if (data.is_deleted == "true") {
+              $("#blocked-group-" + id).html("<i class='fa fa-lock fa-lg'></i>");
+            } else {
+              $("#blocked-group-" + id).html("<i class='fa fa-unlock-alt fa-lg'></i>");
+            }
+          }
+        }
+      });
+    }
+  </script>
+<% end %>
