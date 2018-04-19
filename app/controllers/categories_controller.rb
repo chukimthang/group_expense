@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
       page_index = params[:page].to_i
     end
 
-    @categories = Category.where(is_deleted: false).page(page_index).per(per_page)
+    @categories = Category.page(page_index).per(per_page)
     @total_records = @categories.size
 
     @start_count = 1
@@ -20,35 +20,27 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new category_params
-    category_existed = Category.where(is_deleted: true, name: @category.name).first
-    
-    if category_existed
-      category_existed.update(is_deleted: false)
-      flash[:success] = t "view.message.add_success", resource: 'Category'
+   
+    if @category.save
+      flash[:success] = t 'model.category.message.add_success'
+      msg = {:status => "true", :category => @category}
 
-      redirect_to categories_url
+      respond_to do |format|
+        format.json {render :json => msg}
+      end
     else
-      if @category.save
-        flash[:success] = t "view.message.add_success", resource: 'Category'
-        msg = {:status => "true", :category => @category}
+      @errors = @category.errors.messages
+      msg = {:status => "false", :errors => @errors}
 
-        respond_to do |format|
-          format.json {render :json => msg}
-        end
-      else
-        @errors = @category.errors.messages
-        msg = {:status => "false", :errors => @errors}
-
-        respond_to do |format|
-          format.json {render :json => msg}
-        end
+      respond_to do |format|
+        format.json {render :json => msg}
       end
     end
   end
 
   def update
     if @category.update category_params
-      flash[:success] = t "view.message.update_success", resource: 'Category'
+      flash[:success] = t 'model.category.message.update_success'
       msg = {:status => "true", :category => @category}
 
       respond_to do |format|
@@ -65,20 +57,21 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    count_category = Expense.where(is_deleted: false, category_id: @category.id).count
-   
-    if count_category == 0
-      @category.update(is_deleted: true)
-      flash[:success] = t "view.message.deleted_success", resource: 'Category'
+    count_category_in_expense = Expense.where(is_deleted: false, category_id: @category.id).count
+    count_category_in_product = Product.where(category_id: @category.id).count
+
+    if count_category_in_expense == 0 && count_category_in_product == 0
+      @category.delete
+      flash[:success] = t 'model.category.message.deleted_success'
 
       respond_to do |format|
-        format.html { redirect_to categories_path }
+        format.html { redirect_to group_categories_path }
       end
     else
       flash[:danger] = t "view.message.not_delete"
 
       respond_to do |format|
-        format.html { redirect_to categories_path }
+        format.html { redirect_to group_categories_path }
       end
     end
   end
@@ -98,9 +91,9 @@ class CategoriesController < ApplicationController
     @category = Category.find_by_id params[:id]
 
     if @category.nil?
-      flash[:danger] = t "view.message.not_found", resource: 'Category'
+      flash[:success] = t 'model.category.message.not_found'
 
-      redirect_to categories_url
+      redirect_to group_categories_path
     end
   end
 end
