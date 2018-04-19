@@ -9,6 +9,11 @@ en:
       title:
         add: "Add Category"
         update: "Update Category"
+      message:
+        not_found: "Category not found"
+        add_success: "Category was successfully created"
+        update_success: "Category was successfully updated"
+        deleted_success: "Category was successfully deleted"
         
     product:
       model_name: "Product"

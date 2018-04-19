@@ -1,6 +1,7 @@
 <% content_for :scripts do %>
   <script type="application/javascript">
     var currentScreen = "add";
+    var group_id = <%= params[:group_id] %>
 
     $(document).ready(function() {
       $("#frm_category").validationEngine({
@@ -40,17 +41,18 @@
 
       $(document).on("click", ".glyphicon-trash.glyphicon", function () {
         var id = $(this).data('id');
-        document.getElementById("btn-confirm-delete").href = "/categories/" + id
+        document.getElementById("btn-confirm-delete").href = "/groups/" + group_id + "/categories/" + id
       });
     });
 
     function onChangePageSize(value) {
-      var redirectUrl = "/categories?per_page=" + value;
+      var redirectUrl = "/groups/" + group_id + "/categories?per_page=" + value;
       window.location.replace(redirectUrl);
     }
 
     function onSave() {
       var status = $("#frm_category").validationEngine("validate");
+      
 
       if(status == false){
         return status;
@@ -60,7 +62,7 @@
 
       if (currentScreen == "add"){
         $.ajax({
-          url: '/categories',
+          url: "/groups/" + group_id + "/categories",
           data: data,
           cache: false,
           type: "POST",
@@ -68,7 +70,7 @@
             if (data.status == "false") {
               $('.customErrorContent.name').html(data.errors.name[0]);
             } else {
-              window.location.replace("/categories");
+              window.location.replace("<%= group_categories_path %>");
             }
           }
         });
@@ -76,7 +78,7 @@
         var id = $("#category_form_button").data("category-id");
 
         $.ajax({
-          url: "/categories/" + id,
+          url: "/groups/" + group_id + "/categories/" + id,
           data: data,
           cache: false,
           method: "PATCH",
@@ -85,7 +87,7 @@
             if (data.status == "false") {
               $('.customErrorContent.name').html(data.errors.name[0]);
             } else {
-              window.location.replace("/categories");
+              window.location.replace("<%= group_categories_path %>");
             }
           }
         });
@@ -100,7 +102,7 @@
 
     function showFormEdit(id) {
       data = {id: id};
-      url = "/categories/" + id;
+      url = "/groups/" + group_id + "/categories/" + id;
 
       $.ajax({
         url: url,

@@ -133,30 +133,35 @@ module ApplicationHelper
       }
     ]
 
-    utility_children = Array.new
+    unless params[:group_id].nil?
+      utility_children = Array.new
 
-    utility_children.push({
-      href: categories_path,
-      title: _("#{t('model.category.controller_name')}"),
-      content: "<i class='fa fa-tasks'></i> <span class='menu-item-parent'>" + _("#{t('model.category.controller_name')}") + "</span>",
-      controller: 'categories'
-    })
+      utility_children.push({
+        href: group_categories_path,
+        title: _("#{t('model.category.controller_name')}"),
+        content: "<i class='fa fa-tasks'></i> <span class='menu-item-parent'>" + _("#{t('model.category.controller_name')}") + "</span>",
+        controller: 'categories'
+      })
 
-    utility_children.push({
-      href: products_path,
-      title: _("#{t('model.product.controller_name')}"),
-      content: "<i class='fa fa-product-hunt'></i> <span class='menu-item-parent'>" + _("#{t('model.product.controller_name')}") + "</span>",
-      controller: 'products'
-    })
+      utility_children.push({
+        href: group_products_path,
+        title: _("#{t('model.product.controller_name')}"),
+        content: "<i class='fa fa-product-hunt'></i> <span class='menu-item-parent'>" + _("#{t('model.product.controller_name')}") + "</span>",
+        controller: 'products'
+      })
 
-    utility_menus = Array.new
+      utility_menus = Array.new
 
-    utility_menus.push({
-      href: '#',
-      title: _("#{t('view.menu.utility')}"),
-      content: "<i class='fa fa-cogs fa-lg'></i> <span class='menu-item-parent'>" + _("#{t('view.menu.utility')}") + "</span>",
-      children: utility_children
-    })
-    sidebar_menus = sidebar_menus | utility_menus
+      utility_menus.push({
+        href: '#',
+        title: _("#{t('view.menu.utility')}"),
+        content: "<i class='fa fa-cogs fa-lg'></i> <span class='menu-item-parent'>" + _("#{t('view.menu.utility')}") + "</span>",
+        children: utility_children
+      })
+
+      sidebar_menus = sidebar_menus | utility_menus
+    end
+
+    sidebar_menus
   end
 end

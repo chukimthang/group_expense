@@ -12,7 +12,8 @@
         </h5>
       </div>
 
-      <%= form_with model: Product, :html=> {:class => "form-horizontal", :id => "frm_product"} do |f| %>
+      <%= form_with model: Product, url: group_products_path, 
+        :html=> {:class => "form-horizontal", :id => "frm_product"} do |f| %>
         <div class="modal-body modal-body-custom">
           <div class="form-group">
             <div class="col-md-3 col-xs-3 control-label">

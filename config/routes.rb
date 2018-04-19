@@ -27,13 +27,14 @@ Rails.application.routes.draw do
   # CK editor
   mount Ckeditor::Engine => '/ckeditor'
 
-  resources :categories, except: [:show, :new, :edit]
-  get "categories/:id", to: "categories#get_category_ajax", constraint: OnlyAjaxRequest.new
+  resources :groups, only: [:create, :update, :destroy] do
+    resources :categories, except: [:show, :new, :edit]
+    get "categories/:id", to: "categories#get_category_ajax", constraint: OnlyAjaxRequest.new
 
-  resources :products, except: [:show, :new, :edit]
-  get "products/:id", to: "products#get_product_ajax", constraint: OnlyAjaxRequest.new
-
-  resources :groups, only: [:create, :update, :destroy]
+    resources :products, except: [:show, :new, :edit]
+    get "products/:id", to: "products#get_product_ajax", constraint: OnlyAjaxRequest.new
+  end
+  
   get "groups/:id", to: "groups#get_group_ajax", constraint: OnlyAjaxRequest.new
   post "groups/blocked/:id", to: "groups#post_group_blocked_ajax", constraint: OnlyAjaxRequest.new
 end

@@ -83,7 +83,7 @@ class ProductsController < ApplicationController
     flash[:success] = t "model.product.message.deleted_success"
 
     respond_to do |format|
-      format.html { redirect_to products_path }
+      format.html { redirect_to group_products_path }
     end
   end
 
@@ -107,7 +107,7 @@ class ProductsController < ApplicationController
     if @product.nil?
       flash[:danger] = t "model.product.message.not_found"
 
-      redirect_to products_url
+      redirect_to group_products_url
     end
   end
 end
