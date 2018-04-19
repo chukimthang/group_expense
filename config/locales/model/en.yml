@@ -26,3 +26,19 @@ en:
         update_success: "Product was successfully updated"
         deleted_success: "Product was successfully deleted"
 
+    group:
+      model_name: "Group"
+      controller_name: "Groups"
+      type:
+        name: "Group Name"
+        created_at: "Created Date"
+      title:
+        list: "List Group"
+        add: "Add Group"
+        update: "Update Group"
+      message:
+        not_found: "Group not found"
+        add_success: "Group was successfully created"
+        update_success: "Group was successfully updated"
+        deleted_success: "Group was successfully deleted"
+

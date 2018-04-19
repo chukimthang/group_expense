@@ -13,10 +13,11 @@ en:
       total_records: "Total number of records: %{amount}"
       items_per_page: "Items displayed per page"
       action: "Action"
-      delete_resource: "Delete %{resource}"
+      delete_record: "Delete Record"
       delete_confirm_msg: "Are you sure to delete this record?"
       add_resource: "Add %{resource}"
       error: "Error"
+    home: "Home"
     message:
     menu:
       administration: "Administration"

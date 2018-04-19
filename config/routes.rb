@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  root 'home#blank_page'
+  root 'home#index'
   
   # AJAX
   get 'ajax/email_compose', to: 'ajax#email_compose', as: :ajax_email_compose
@@ -32,4 +32,8 @@ Rails.application.routes.draw do
 
   resources :products, except: [:show, :new, :edit]
   get "products/:id", to: "products#get_product_ajax", constraint: OnlyAjaxRequest.new
+
+  resources :groups, only: [:create, :update, :destroy]
+  get "groups/:id", to: "groups#get_group_ajax", constraint: OnlyAjaxRequest.new
+  post "groups/blocked/:id", to: "groups#post_group_blocked_ajax", constraint: OnlyAjaxRequest.new
 end
