@@ -112,3 +112,16 @@ label.error {
     border-radius: 0px !important;
   }
 }
+
+.has-error {
+  border-color: #b94a48;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+.no-error{
+  border-color: #CCCCCC;
+}
+
+.form-horizontal input[type="checkbox"] {
+  margin: 10px 0 0;
+}

@@ -14,7 +14,7 @@
         <% @groups.each do |group| %>
           <tr>
             <td><%= @start_count %></td>
-            <td><a href="<%= group_categories_path(group_id: group.id) %>">
+            <td><a href="<%= group_products_path(group_id: group.id) %>">
               <%= group.name %></a></td>
             <td><%= group.created_at.strftime("%m/%d/%Y") %></td>
             <td>

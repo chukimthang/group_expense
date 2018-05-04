@@ -67,6 +67,7 @@
       $("#name").val("");
       $("#category_id").val(0);
       $("#category_id").trigger("chosen:updated");
+      $("#is_shared").prop("checked", false);
     }
 
     function onChangePageSize(value) {
@@ -87,6 +88,9 @@
           $("#name").val(data.name);
           $("#category_id").val(data.category_id);
           $("#category_id").trigger("chosen:updated");
+          if (data.is_shared) {
+            $("#is_shared").prop("checked", true);
+          }
         }
       });
     }

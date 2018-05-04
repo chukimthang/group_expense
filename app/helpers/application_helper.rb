@@ -153,9 +153,9 @@ module ApplicationHelper
       utility_menus = Array.new
 
       utility_menus.push({
-        href: '#',
-        title: _("#{t('view.menu.utility')}"),
-        content: "<i class='fa fa-cogs fa-lg'></i> <span class='menu-item-parent'>" + _("#{t('view.menu.utility')}") + "</span>",
+        href: "#",
+        title: _("#{t('common.menu.utility')}"),
+        content: "<i class='fa fa-cogs fa-lg'></i> <span class='menu-item-parent'>" + _("#{t('common.menu.utility')}") + "</span>",
         children: utility_children
       })
 

@@ -2,15 +2,6 @@
   <%= form_for :@product, :html=> {:id => "frm_search_product", :method => "GET", 
     :enforce_utf8 => false, :class => "form-horizontal"} do |f| %>
     <div class="col-md-12">
-      <div class="col-md-5 form-group">
-        <%= f.label :name, t("model.product.type.name"),
-          {class: "col-md-5 control-label"} %>
-        <div class="col-md-7">
-          <%= f.text_field :name, {class: "form-control", id: "search_name", 
-            placeholder: t("model.product.type.name"), name: "search_name"} %>
-        </div>
-      </div>
-
       <div class="col-md-5 form-group custom-chosen">
         <%= f.label :category_id, t("model.product.type.category_id"),
           {class: "col-md-5 control-label"} %>
@@ -18,6 +9,15 @@
           <%= f.collection_select :category_id, @categories_select, :id, :name.to_s,
             {prompt: false}, {class: "chosen-select form-control", 
             name: "search_category_id", id: "search_category_id"} %>
+        </div>
+      </div>
+
+      <div class="col-md-5 form-group">
+        <%= f.label :name, t("model.product.type.name"),
+          {class: "col-md-5 control-label"} %>
+        <div class="col-md-7">
+          <%= f.text_field :name, {class: "form-control", id: "search_name", 
+            placeholder: t("model.product.type.name"), name: "search_name"} %>
         </div>
       </div>
 
