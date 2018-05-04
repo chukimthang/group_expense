@@ -3,7 +3,7 @@ module CommonHelper
   FORMAT_DATE = "%m/%d/%Y"
 
   def get_select_categories has_default = false
-    categories = Category.all
+    categories = Category.select(:id, :name)
 
     if has_default
       categories = [GroupItem.new(0, t("common.form.all_selection"))] + categories

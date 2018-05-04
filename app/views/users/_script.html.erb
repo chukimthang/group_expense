@@ -1,0 +1,103 @@
+<% content_for :scripts do %>
+  <script type="application/javascript">
+    $(document).ready(function() {
+      initColumnSearch();
+
+      <% if params[:per_page] %>
+        $("#ddlPageSize").val(<%= params[:per_page] %>);
+      <% else %>
+        $("#ddlPageSize").val(<%= User::PAGE_SIZE %>);
+      <% end %>
+
+      <% if params[:search_email] %>
+        $("#search_email").val("<%= params[:search_email] %>");
+      <% end %>
+
+      <% unless params[:search_is_deleted].blank? %>
+        $("#search_is_deleted").val(<%= params[:search_is_deleted].to_i %>);
+      <% end %>
+
+      <% if params[:search_is_deleted].nil? %>
+        $("#search_is_deleted").val(0);
+      <% end %>
+
+      $(".button_search_user").on("click", function() {
+        onSearch();
+      });
+
+      $(".blocked-user").on("click", function() {
+        var id = $(this).data("id");
+        onActive(id);
+      });
+    });
+
+    function onChangePageSize(value) {
+      var redirectUrl = "/users?per_page=" + value;
+      window.location.replace(redirectUrl);
+    }
+
+    function onSearch() {
+      $("#frm_search_user").submit();
+    }
+
+    function onActive(id) {
+      $.ajax({
+        url: '/users/' + id,
+        data: {id: id},
+        cache: false,
+        type: "DELETE",
+        success: function(data){
+          if (data.status == "true") {
+            if (data.is_deleted == "true") {
+              $("#blocked-user-" + id).html("<i class='fa fa-lock fa-lg'></i>");
+            } else {
+              $("#blocked-user-" + id).html("<i class='fa fa-unlock-alt fa-lg'></i>");
+            }
+          }
+        }
+      });
+    }
+
+    // function set icon up/down column table
+    function initColumnSearch() {
+      $(".sign").removeClass("arrow");
+      $(".sign").removeClass("up");
+      var sort_by = $("#sort_by").val();
+      var sort_name = $("#sort_name").val();
+
+      if (sort_by == "asc") {
+        if (sort_name == "email") {
+          $("#email").find(".sign").addClass("arrow up");
+        }
+        if (sort_name == "created_at") {
+          $("#created_at").find(".sign").addClass("arrow up");
+        }
+      } else {
+        if (sort_name == "email") {
+          $("#email").find(".sign").addClass("arrow");
+        }
+        if (sort_name == "created_at") {
+          $("#created_at").find(".sign").addClass("arrow");
+        }
+      }
+    }
+
+    // event click column header table
+    function onSortColumn(id_column, name_column) {
+      $(".sign").removeClass("arrow");
+      $(".sign").removeClass("up");
+      var sort_by = $("#sort_by").val();
+
+      if (sort_by == "asc") {
+        $("#sort_by").val("desc");
+        $(id_column).find(".sign").addClass("arrow up");
+      } else {
+        $("#sort_by").val("asc");
+        $(id_column).find(".sign").addClass("arrow");
+      }
+      
+      $("#sort_name").val(name_column);
+      onSearch();
+    }
+  </script>
+<% end %>

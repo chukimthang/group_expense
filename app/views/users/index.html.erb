@@ -1,0 +1,60 @@
+<% content_for :ribbon do %>
+  <div id="ribbon">
+    <a href="/"><i class="fa fa-cogs fa-lg"></i></a>
+    <ol class="breadcrumb">
+      <li><a href="<%= users_path %>"><%= t("common.form.administrator") %></a></li>
+      <li>
+        <a href="<%= users_path %>">
+          <%= t("model.user.model_name") %>
+        </a>
+      </li>
+      <li><%= t("common.form.list") %></li>
+    </ol>
+  </div>
+<% end %>
+
+<article class="col-sm-12 col-md-12 col-lg-12">
+  <div class="custom-widget">
+    <header role="heading">
+      <div class="col-xs-8 title">
+        <h5><%= t("model.user.title.list") %></h5>
+      </div>
+
+      <div class="col-xs-4">
+        <a href="#">
+          <span class="btn custom-btn-green btn-add pull-right">
+            <%= t("common.form.add") %>
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <div class="wg-content">
+      <%= render "search" %>
+
+      <div class="row listing-container">
+        <div class="row content-header">
+          <div class="col-sm-4 pull-left total_records">
+            <%= t("common.form.total_records", amount: @total_records) %>
+          </div>
+
+          <div class="col-sm-4 pull-right">
+            <div class="row items_per_page">
+              <div class="col-sm-8 text-align-right label-middle">
+                <%= t("common.form.items_per_page") %>
+              </div>
+
+              <div class="col-sm-4 pull-right wp-pagesize">
+                <%= render "shared/pagesize" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%= render "list" %>
+    </div>
+  </div>
+</article>
+
+<%= render "script" %>

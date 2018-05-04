@@ -1,0 +1,51 @@
+<div class="table-responsive">
+  <table class="custom-table table table-striped table-bordered sortable">
+    <thead>
+      <tr>
+        <th class="col-sm-1"><%= t("common.form.no") %></th>
+        <th class="col-sm-5" id="email" onclick="onSortColumn(this, 'email');">
+          <span class="sign"></span><%= t("model.user.type.email") %></th>
+        <th class="col-sm-2"><%= t("model.user.type.is_admin") %></th>
+        <th class="col-sm-3" id="created_at" onclick="onSortColumn(this, 'created_at');">
+          <span class="sign"></span><%= t("model.user.type.created_at") %></th>
+        <th class="col-sm-1"><%= t("common.form.action") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @users.any? %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= @start_count %></td>
+            <td><%= user.email %></td>
+            <td><%= user.is_admin ? t("common.yes") : t("common.no") %></td>
+            <td><%= user.created_at.strftime("%m/%d/%Y") %></td>
+            <td>
+              <% unless user.is_admin %>
+                <a href="javascript:void(0)" class="blocked-user" 
+                  id="blocked-user-<%= user.id %>" data-id="<%= user.id %>">
+                  <% if user.is_deleted? %>
+                    <i class="fa fa-lock fa-lg"></i>
+                  <% else %>
+                    <i class="fa fa-unlock-alt fa-lg"></i>
+                  <% end %>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+          <% @start_count += 1 %>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" align="center"><%= t("common.table.empty") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="text-align-center custom-kaminari">
+  <% unless @users.nil? %>
+    <%= paginate @users %>
+  <% end %>
+</div>

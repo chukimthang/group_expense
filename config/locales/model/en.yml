@@ -48,3 +48,16 @@ en:
         update_success: "Group was successfully updated"
         deleted_success: "Group was successfully deleted"
 
+    user:
+      model_name: "User"
+      controller_name: "Users"
+      type:
+        email: "Email"
+        is_admin: "Admin"
+        created_at: "Created Date"
+      title:
+        list: "List User"
+        create: "Create User"
+      message:
+        not_found: "User not found"
+        add_success: "User was successfully created"

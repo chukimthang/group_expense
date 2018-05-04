@@ -133,6 +133,26 @@ module ApplicationHelper
       }
     ]
 
+    # administration menus
+    administration_children = Array.new
+
+    administration_children.push({
+      href: users_path,
+      title: _("#{t('model.user.controller_name')}"),
+      content: "<i class='fa fa-user'></i> <span class='menu-item-parent'>" + _("#{t('model.user.controller_name')}") + "</span>",
+      controller: 'users'
+    })
+
+    administration_menus = Array.new
+    administration_menus.push({
+      href: "#",
+      title: _("#{t('common.menu.administration')}"),
+      content: "<i class='fa fa-cogs fa-lg'></i> <span class='menu-item-parent'>" + _("#{t('common.menu.administration')}") + "</span>",
+      children: administration_children
+    })
+    sidebar_menus = sidebar_menus | administration_menus
+
+    # utility menus
     unless params[:group_id].nil?
       utility_children = Array.new
 
@@ -155,7 +175,7 @@ module ApplicationHelper
       utility_menus.push({
         href: "#",
         title: _("#{t('common.menu.utility')}"),
-        content: "<i class='fa fa-cogs fa-lg'></i> <span class='menu-item-parent'>" + _("#{t('common.menu.utility')}") + "</span>",
+        content: "<i class='fa fa-table'></i> <span class='menu-item-parent'>" + _("#{t('common.menu.utility')}") + "</span>",
         children: utility_children
       })
 

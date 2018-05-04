@@ -37,4 +37,6 @@ Rails.application.routes.draw do
   
   get "groups/:id", to: "groups#get_group_ajax", constraint: OnlyAjaxRequest.new
   post "groups/blocked/:id", to: "groups#post_group_blocked_ajax", constraint: OnlyAjaxRequest.new
+
+  resources :users, except: :show
 end

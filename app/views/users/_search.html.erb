@@ -1,0 +1,33 @@
+<div class="row search-content" id="user-search">
+  <%= form_for :@product, :html=> {:id => "frm_search_user", :method => "GET", 
+    :enforce_utf8 => false, :class => "form-horizontal"} do |f| %>
+    <%= f.hidden_field :sort_name, :value => @sort_name, :name => 'sort_name', :id => 'sort_name' %>
+    <%= f.hidden_field :sort_by, :value => @sort_by, :name => 'sort_by', :id => 'sort_by' %>
+
+    <div class="col-md-12">
+      <div class="col-md-5 form-group">
+        <%= f.label :email, t("model.user.type.email"),
+          {class: "col-md-5 control-label"} %>
+        <div class="col-md-7">
+          <%= f.text_field :email, {class: "form-control", id: "search_email", 
+            placeholder: t("model.user.type.email"), name: "search_email"} %>
+        </div>
+      </div>
+
+      <div class="col-md-5 form-group custom-chosen">
+        <%= f.label :is_deleted, t("common.actived"),
+          {class: "col-md-5 control-label"} %>
+        <div class="col-md-7">
+          <%= f.select :is_deleted, @status_user, {}, {class: "form-control", 
+            id: "search_is_deleted", name: "search_is_deleted"} %>
+        </div>
+      </div>
+
+      <div class="col-md-2 form-group" align="right">
+        <button type="button" class="btn custom-btn-green button_search_user">
+          <%= t("common.form.search") %></button>
+      </div>
+    </div>
+  <% end %>
+  <div class="clearfix"></div>
+</div>
