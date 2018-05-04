@@ -11,10 +11,15 @@ class ProductsController < ApplicationController
       page_index = params[:page].to_i
     end
 
+    unless params[:group_id].nil?
+      group_id = params[:group_id].to_i
+    end
+
     name = params[:search_name] unless params[:search_name].nil?
     category_id = params[:search_category_id] ? params[:search_category_id].to_i : 0
 
     @products = Product.includes(:category)
+                      .by_group(group_id)
                       .by_name(name)
                       .by_category(category_id)
                       .order(category_id: :asc)
@@ -95,8 +100,11 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params[:product][:group_id] = 0
-    params[:product][:is_shared] = 1
+    if params[:product][:is_shared].to_i == 1
+      params[:product][:group_id] = 0
+    else
+      params[:product][:group_id] = params[:group_id].to_i
+    end
 
     params.require(:product).permit(:name, :category_id, :group_id, :is_shared)
   end

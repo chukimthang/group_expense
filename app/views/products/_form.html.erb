@@ -40,6 +40,18 @@
               <div class="customErrorContent category_id"></div>
             </div>
           </div>
+
+          <% if current_user.is_admin %>
+            <div class="form-group">
+              <div class="col-md-3 col-xs-3 control-label">
+                <%= t("model.product.type.is_shared")%>
+              </div>
+
+              <div class="col-md-7 col-xs-7">
+                <%= f.check_box :is_shared, id: "is_shared" %>
+              </div>
+            </div>
+          <% end %>
         </div>
 
         <div class="modal-footer modal-footer-custom">

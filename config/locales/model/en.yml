@@ -21,6 +21,7 @@ en:
       type:
         name: "Product Name"
         category_id: "Category"
+        is_shared: "Shared"
       title:
         list: "List Product"
         add: "Add Product"
