@@ -24,3 +24,9 @@ en:
       utility: "Utilities"
     table:
       empty: "Table Empty"
+
+    yes: "Yes"
+    no: "No"
+    actived: "Actived"
+    inactived: "Inactive"
+

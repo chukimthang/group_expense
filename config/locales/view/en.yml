@@ -6,3 +6,4 @@ en:
       update_success: '%{resource} was successfully updated'
       deleted_success: '%{resource} was successfully deleted.'
       not_delete: "Not Delete"
+
