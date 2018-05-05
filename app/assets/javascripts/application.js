@@ -29,3 +29,7 @@
 
 //= require common
 //= require chosen-jquery
+
+//= require plugin/markdown/markdown
+//= require plugin/markdown/to-markdown
+//= require plugin/markdown/bootstrap-markdown

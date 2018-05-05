@@ -1,0 +1,28 @@
+<% content_for :ribbon do %>
+  <div id="ribbon">
+    <i class="fa fa-cogs fa-lg"></i>
+    <ol class="breadcrumb">
+      <li><a href="/"><%= t("common.menu.administrator") %></a></li>
+      <li>
+        <%= link_to t("model.user.model_name"), users_path %>
+      </li>
+      <li><%= t("common.form.create") %></li>
+    </ol>
+  </div>
+<% end %>
+
+<article class="col-sm-12 col-md-12 col-lg-12">
+  <div class="custom-widget" id="users-widget">
+    <header role="heading">
+      <div class="col-xs-8 title">
+        <h5><%= t("model.user.title.create") %></h5>
+      </div>
+    </header>
+
+    <div class="wg-content">
+      <div class="row search-content">
+        <%= render "form" %>
+      </div>
+    </div>
+  </div>
+</article>

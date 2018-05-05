@@ -55,6 +55,14 @@ en:
         email: "Email"
         is_admin: "Admin"
         created_at: "Created Date"
+        password: "Password"
+        password_confirm: "Password Confirm" 
+        full_name: "Full Name"
+        birthday: "Birthday"
+        user_type: "User Type"
+        normal_user: "Normal User"
+        descript: "Description"
+
       title:
         list: "List User"
         create: "Create User"
