@@ -30,3 +30,6 @@ en:
     actived: "Actived"
     inactived: "Inactive"
 
+    constant_js:
+      validate_format_date: "* Please enter date in MM/dd/yyyy format."
+      validate_password_message: "* Password does not match the confirm password"

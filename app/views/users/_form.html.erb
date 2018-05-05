@@ -1,0 +1,146 @@
+ <%= form_for @user, :html => {class: "form-horizontal", id: "frm_user"} do |f| %>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= f.label :email, t("model.user.type.email") %>
+          <span class="require">(*)</span>
+        </div>
+
+        <div class="col-md-7">
+          <%= f.email_field :email, {class: "form-control validate[required, custom[email], ajax[ajaxUserCall]]",
+            placeholder: t("model.user.type.email")} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= f.label :password, t("model.user.type.password") %>
+          <span class="require">(*)</span>
+        </div>
+
+        <div class="col-md-7">
+          <%= f.password_field :password, {class: "form-control validate[required, minSize[6]]", 
+            placeholder: t("model.user.type.password")} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= f.label :password_confirmation, t("model.user.type.password_confirm") %>
+          <span class="require">(*)</span>
+        </div>
+
+        <div class="col-md-7">
+          <%= f.password_field :password_confirmation, {class: "form-control 
+            validate[required, funcCall[isComparePassWord]]",
+            placeholder: t("model.user.type.password_confirm")} %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= f.label :full_name, t("model.user.type.full_name") %>
+          <span class="require">(*)</span>
+        </div>
+
+        <div class="col-md-7">
+          <%= f.text_field :full_name, {class: "form-control validate[required]", 
+            placeholder: t("model.user.type.full_name")} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= f.label :birthday, t("model.user.type.birthday") %>
+          <span class="require">(*)</span>
+        </div>
+
+        <div class="col-md-7">
+          <label class="input"><i class="icon-append fa fa-calendar"></i>
+            <%= f.text_field :birthday, {class: "datepicker form-control 
+              validate[required, funcCall[isDate]]", "data-dateformat" => 'mm/dd/yy', placeholder: 'MM/DD/YYYY' } %>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= f.label :is_admin, t("model.user.type.user_type") %>
+        </div>
+
+        <div class="col-md-7">
+          <%= f.radio_button :is_admin, 1 %> 
+          <%= label :is_admin, t("model.user.type.is_admin"), {class: "user-type-option-label"} %>
+          <%= f.radio_button :is_admin, 0, :checked => true %>
+          <%= label :is_admin, t("model.user.type.normal_user") %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12" style="padding-top: 13px;">
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="col-md-2">
+          <%= f.label :description, t("model.user.type.descript") %>
+        </div>
+
+        <div class="col-md-10 box-descriptions">
+          <div class="jarviswidget jarviswidget-color-purple" id="wid-id-2" data-widget-colorbutton="false"
+            data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false"
+            data-widget-sortable="false">
+            <div class="widget-body no-padding">
+              <%= f.text_area :description, {class: "form-control custom-scroll", 
+                placeholder: t('model.user.type.descript'), rows: 5, id: "description"} %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+           <button type="button" class="btn custom-btn-green btn-submit" id="user_form_button">
+              <%= t("common.form.create") %></button>
+            <a href="<%= users_path %>" class="btn btn-default"><%= t("common.form.cancel") %></a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render "shared/constantsjs" %>
+
+<% content_for :scripts do %>
+  <script type="application/javascript">
+    $(document).ready(function() {
+      $("#description").markdown({
+        savable:false
+      });
+
+      $("#frm_user").validationEngine({
+        promptPosition: "inline",
+        addSuccessCssClassToField: "no-error",
+        addFailureCssClassToField: "has-error",
+        validateNonVisibleFields: true,
+        "ajaxUserCall": {
+          "url": "ajaxValidateFieldUser",
+          "extraData": "name=user[email]",
+          "alertText": "* This user is already taken",
+          "alertTextOk": " * User is valid",
+          "alertTextLoad": "* Validating, please wait"
+        }
+      });
+
+      $("#user_form_button").on("click", function() {
+        onSave();
+      });
+    });
+
+    function onSave() {
+      $("#frm_user").attr("action", "/users/create").submit();
+    }
+ </script>
+<% end %>

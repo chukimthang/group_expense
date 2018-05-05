@@ -27,3 +27,7 @@
 - Use routes member
 6. Listing user
 - Apply sortable in table
+7. Create user
+- Use form field: email_field, password_field, text_field , radio_button, text_area
+- Apply plugin markdown in text_area
+- Apply jQuery-Validation-Engine: funcCall, ajax

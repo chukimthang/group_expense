@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include CommonHelper
+
   before_action :find_user, only: :destroy
 
   def index
@@ -29,6 +31,19 @@ class UsersController < ApplicationController
   end
 
   def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new user_params
+   
+    if @user.save
+      flash[:success] = t("model.user.message.add_success")
+
+      redirect_to users_url    
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -47,6 +62,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def ckeck_user_exists_ajax
+    user_count = User.where(email: params[:fieldValue]).count
+
+    if user_count > 0
+      render :json => ["user_email", false]
+    else
+      render :json => ["user_email", true]
+    end
+  end
+
   private
   def find_user
     @user = User.find_by_id params[:id]
@@ -56,5 +81,12 @@ class UsersController < ApplicationController
 
       redirect_to users_url
     end
+  end
+
+  def user_params
+    params[:user][:birthday] = to_date(params[:user][:birthday])
+    
+    params.require(:user).permit(:email, :password, :password_confirmation, 
+      :is_admin, :full_name, :birthday, :description)
   end
 end

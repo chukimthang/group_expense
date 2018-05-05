@@ -125,3 +125,30 @@ label.error {
 .form-horizontal input[type="checkbox"] {
   margin: 10px 0 0;
 }
+
+.user-type-option-label {
+  margin-right: 10px;
+  position: relative;
+}
+
+.box-descriptions {
+  .widget-body.no-padding {
+    margin: 0px;
+  }
+
+  .md-editor > textarea {
+    background: none;
+  }
+
+  .widget-body .md-editor{
+    border-top: 1px solid #CCC !important;
+  }
+
+  .jarviswidget {
+    margin-bottom: 0;
+  }
+}
+
+.ui-datepicker{
+  z-index: 10020 !important;
+}
