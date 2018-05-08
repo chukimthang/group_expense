@@ -1,0 +1,34 @@
+<% content_for :ribbon do %>
+  <div id="ribbon">
+    <a href="/"><i class="fa fa-user"></i></a>
+    <ol class="breadcrumb">
+      <li><a href="<%= group_group_members_path %>">
+        <%= t("model.group_member.model_name") %></a></li>
+      <li><%= t("model.group_member.title.add_member") %></li>
+    </ol>
+  </div>
+<% end %>
+
+<article class="col-sm-12 col-md-12 col-lg-12">
+  <div class="custom-widget">
+    <header role="heading">
+      <div class="col-xs-8 title">
+        <h5><%= t("model.group_member.title.list") %></h5>
+      </div>
+    </header>
+
+    <div class="wg-content">
+      <div class="row search-content">
+        <%= render "add_member" %>
+      </div>
+
+      <div class="row listing-container">
+        <%= render "list" %>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- render "typeahead_script" -->
+<%= render "script" %>
+

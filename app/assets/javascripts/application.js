@@ -27,9 +27,15 @@
 // MAIN APP JS FILE
 //= require app.seed
 
+// PLUGIN 
+
 //= require common
 //= require chosen-jquery
 
 //= require plugin/markdown/markdown
 //= require plugin/markdown/to-markdown
 //= require plugin/markdown/bootstrap-markdown
+
+//= require bootstrap-tagsinput
+//= require twitter/typeahead
+//= require twitter/typeahead.min

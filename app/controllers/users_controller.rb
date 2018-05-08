@@ -72,6 +72,35 @@ class UsersController < ApplicationController
     end
   end
 
+   def get_user_ajax
+    @user = User.where(email: params[:email], is_deleted: false).select(:id, :email, :full_name).first 
+
+    if @user
+      group_members = GroupMember.where(is_deleted: false, group_id: params[:group_id])
+      flag = true
+
+      group_members.each do |group_member|
+        if group_member.user_id == @user.id
+          flag = false
+
+          respond_to do |format|
+            format.json { render json: { error: "Member exist" }, status: :bad_request }
+          end
+        end
+      end
+
+      if flag
+        respond_to do |format|
+          format.json { render json: @user, status: :ok }
+        end
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { error: "User not found" }, status: :bad_request }
+      end
+    end
+  end
+
   private
   def find_user
     @user = User.find_by_id params[:id]

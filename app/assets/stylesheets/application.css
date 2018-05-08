@@ -37,6 +37,6 @@
  *= require lockscreen
 
  *= require chosen
-
  *= require custom-bootstrap-sortable
+ *= require bootstrap-tagsinput
  */
