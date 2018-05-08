@@ -1,0 +1,24 @@
+ <div class="col-md-12">
+  <%= form_for @group_member, url: group_group_members_path, 
+    :html=> {:class => "form-horizontal", :id => "frm_add_member"} do |f| %>
+    <%= f.hidden_field :list_members_hidden, :value => "[]" , 
+      name: "list_members_hidden", id:"list_members_hidden" %>
+    <!-- f.hidden_field :list_user_hidden, :value => @list_cities, 
+    :name => 'list_user_hidden', :id => 'list_user_hidden' -->
+
+    <div class="form-group">
+      <%= f.label :list_user_email, t("model.group_member.label.member"),
+          {class: "col-md-1 control-label text-align-left"} %>
+      <div class="col-md-10 ">
+        <%= f.text_field :list_user_email, {:id => "input-members",
+          :class => "form-control tagsinput validate[required]", 
+          'data-role'=>'tagsinput', :value => "", 
+          placeholder: t("model.group_member.label.enter_email") } %>
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn custom-btn-green button_add_member">
+          <%= t("common.form.add") %></button>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   PAGE_SIZE = 10
 
+  has_many :group_members
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

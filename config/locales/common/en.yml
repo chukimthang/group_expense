@@ -28,6 +28,7 @@ en:
     yes: "Yes"
     no: "No"
     actived: "Actived"
+    active: "Active"
     inactived: "Inactive"
 
     constant_js:

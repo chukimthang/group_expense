@@ -1,0 +1,79 @@
+<% content_for :scripts do %>
+  <script type="application/javascript">
+    var group_id = "<%= params[:group_id] %>";
+
+    $(document).ready(function() {
+      $("#frm_add_member").validationEngine({
+        promptPosition: "inline",
+        addSuccessCssClassToField: "no-error",
+        addFailureCssClassToField: "has-error",
+        validateNonVisibleFields: true
+      });
+
+      $("#input-members").on('itemAdded', function(event) {
+        var url = "/groups/" + group_id + "/users/get_user";
+        var data = {
+          email: event.item,
+          group_id: group_id
+        };
+
+        $.ajax({
+          url: url,
+          method: "GET",
+          data: data,
+          dataType: "json",
+          success: function(data) {
+            var data_text = $("#list_members_hidden").val();
+            if(data_text != ""){
+              list_members = JSON.parse(data_text);
+              list_members.push(data);
+              $("#list_members_hidden").val(JSON.stringify(list_members));
+            }
+          },
+          error: function(){
+            $(".bootstrap-tagsinput .tag").last().addClass("bg-danger-red");
+          }
+        });
+      });
+
+      $(".blocked-member").on("click", function() {
+        var id = $(this).data("id");
+        onActive(id);
+      });
+
+      $(".button_add_member").on("click", function() {
+        onSave();
+      });
+    });
+
+    function onSave() {
+      var status = $("#project-member-form").validationEngine("validate");
+
+      if(status == false){
+          return status;
+      }
+
+      $("#frm_add_member").submit();
+
+      return true;
+    }
+
+    function onActive(id) {
+      $.ajax({
+        url: "/groups/" + group_id + "/group-members/" + id,
+        data: {id: id},
+        cache: false,
+        type: "DELETE",
+        success: function(data){
+          if (data.status == "true") {
+            if (data.is_deleted == "true") {
+              $("#blocked-member-" + id).html("<i class='fa fa-lock fa-lg'></i>");
+            } else {
+              $("#blocked-member-" + id).html("<i class='fa fa-unlock-alt fa-lg'></i>");
+            }
+          }
+        }
+      });
+    }
+  </script> 
+<% end %>

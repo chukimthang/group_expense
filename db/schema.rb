@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180504125227) do
+ActiveRecord::Schema.define(version: 20180508103140) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name", null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180504125227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_deleted", default: false
+    t.integer "create_by_user", null: false
   end
 
   create_table "incomes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -57,9 +58,9 @@ ActiveRecord::Schema.define(version: 20180504125227) do
   create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "user_id", default: 0
     t.integer "group_id", default: 0
-    t.integer "user_admin_group_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
   end
 
   create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

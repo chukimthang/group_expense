@@ -1,3 +1,5 @@
+$('[data-toggle="tooltip"]').tooltip();
+
 $('.datepicker').datepicker({
   dateFormat : 'mm/dd/yy',
   prevText : '<i class="fa fa-chevron-left"></i>',
@@ -32,3 +34,5 @@ function isComparePassWord(field, rules, i, options) {
     }
   }
 }
+
+

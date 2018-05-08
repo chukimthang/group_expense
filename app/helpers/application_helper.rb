@@ -152,10 +152,30 @@ module ApplicationHelper
     })
     sidebar_menus = sidebar_menus | administration_menus
 
-    # utility menus
     unless params[:group_id].nil?
-      utility_children = Array.new
+      # group member
 
+      member_children = Array.new
+      member_children.push({
+        href: group_group_members_path,
+        title: _("#{t('model.group_member.title.add')}"),
+        content: "<i class='fa fa-plus-square'></i> <span class='menu-item-parent'>" + _("#{t('model.group_member.title.add')}") + "</span>",
+        controller: 'group_members'
+      })
+
+      member_menus = Array.new
+      member_menus.push({
+        href: "#",
+        title: _("#{t('model.group_member.controller_name')}"),
+        content: "<i class='glyphicon glyphicon-user'></i> <span class='menu-item-parent'>" + _("#{t('model.group_member.controller_name')}") + "</span>",
+        children: member_children
+      })
+
+      sidebar_menus = sidebar_menus | member_menus
+
+      # utility menus
+
+      utility_children = Array.new
       utility_children.push({
         href: group_categories_path,
         title: _("#{t('model.category.controller_name')}"),
@@ -171,7 +191,6 @@ module ApplicationHelper
       })
 
       utility_menus = Array.new
-
       utility_menus.push({
         href: "#",
         title: _("#{t('common.menu.utility')}"),

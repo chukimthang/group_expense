@@ -33,6 +33,9 @@ Rails.application.routes.draw do
 
     resources :products, except: [:show, :new, :edit]
     get "products/:id", to: "products#get_product_ajax", constraint: OnlyAjaxRequest.new
+
+    resources :group_members, only: [:index, :create, :destroy], path: '/group-members'
+    get "users/get_user", to: "users#get_user_ajax", constraint: OnlyAjaxRequest.new
   end
   
   get "groups/:id", to: "groups#get_group_ajax", constraint: OnlyAjaxRequest.new

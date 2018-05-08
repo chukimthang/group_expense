@@ -62,10 +62,28 @@ en:
         user_type: "User Type"
         normal_user: "Normal User"
         descript: "Description"
-
       title:
         list: "List User"
         create: "Create User"
       message:
         not_found: "User not found"
         add_success: "User was successfully created"
+
+    group_member:
+      model_name: "Group Member"
+      controller_name: "Group Member"
+      type:
+        group_id: "Group"
+        created_at: "Join Date"
+      label:
+        member: "Member"
+        enter_member: "Enter Member"
+        enter_email: "Enter Email"
+      title:
+        list: "List Group Member"
+        add: "Add Member"
+      message:
+        not_found: "Member not found"
+        add_success: "Member was successfully add"
+        deleted_success: "Member was successfully deleted"
+

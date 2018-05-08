@@ -5,6 +5,11 @@ class GroupsController < ApplicationController
     @group = Group.new group_params
   
     if @group.save
+      group_member = GroupMember.new
+      group_member.user_id = current_user.id
+      group_member.group_id = @group.id
+      group_member.save
+
       flash[:success] = t "model.group.message.add_success"
       msg = {:status => "true", :group => @group}
 
@@ -85,7 +90,9 @@ class GroupsController < ApplicationController
 
   private
   def group_params
-    params.require(:group).permit(:name)
+    params[:group][:create_by_user] = current_user.id
+    
+    params.require(:group).permit(:name, :create_by_user)
   end
 
   def find_group

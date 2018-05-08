@@ -1,0 +1,50 @@
+<div class="table-responsive">
+  <table class="custom-table table table-striped table-bordered sortable">
+    <thead>
+      <tr>
+        <th class="col-sm-1"><%= t("common.form.no") %></th>
+        <th class="col-sm-3"><%= t("model.user.type.email") %></th>
+        <th class="col-sm-3"><%= t("model.user.type.full_name") %></th>
+        <th class="col-sm-2"><%= t("model.group_member.type.group_id") %></th>
+        <th class="col-sm-2"><%= t("model.group_member.type.created_at") %></th>
+        <th class="col-sm-1"><%= t("common.form.action") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @group_members.any? %>
+        <% count = 1 %>
+        <% @group_members.each do |group_member| %>
+          <tr>
+            <td><%= count %></td>
+            <td><%= group_member.user.email %></td>
+            <td><%= group_member.user.full_name %></td>
+            <td><%= group_member.group.name %></td>
+            <td><%= group_member.created_at.strftime("%m/%d/%Y") %></td>
+            <td>
+              <% if group_member.group.create_by_user == current_user.id &&
+                group_member.user_id != group_member.group.create_by_user %>
+                <a href="javascript:void(0)" class="blocked-member" 
+                  id="blocked-member-<%= group_member.id %>" 
+                  data-id="<%= group_member.id %>">
+                  <% if group_member.is_deleted? %>
+                    <i class="fa fa-lock fa-lg" rel="tooltip" data-placement="bottom"
+                      data-original-title="<%= t('common.active') %>"></i>
+                  <% else %>
+                    <i class="fa fa-unlock-alt fa-lg" rel="tooltip" data-placement="bottom"
+                      data-original-title="<%= t('common.inactived') %>"></i>
+                  <% end %>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+          <% count += 1 %>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" align="center"><%= t("common.table.empty") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
