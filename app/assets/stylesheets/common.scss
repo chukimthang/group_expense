@@ -156,3 +156,15 @@ label.error {
 .bg-danger-red {
   background: #ea6161 !important;
 }
+
+#table_transaction_wrapper .dt-toolbar {
+  padding: 1px !important;
+}
+
+span.expense {
+  color: #e64b30;
+}
+
+span.income {
+  color: #51b44f;
+}

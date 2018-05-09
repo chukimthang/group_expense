@@ -153,6 +153,26 @@ module ApplicationHelper
     sidebar_menus = sidebar_menus | administration_menus
 
     unless params[:group_id].nil?
+      # Transaction
+
+      transaction_children = Array.new
+      transaction_children.push({
+        href: group_transactions_path,
+        title: _("#{t('model.transaction.title.add')}"),
+        content: "<i class='fa fa-plus-square'></i> <span class='menu-item-parent'>" + _("#{t('model.transaction.title.add')}") + "</span>",
+        controller: 'transactions'
+      })
+
+      transaction_menus = Array.new
+      transaction_menus.push({
+        href: "#",
+        title: _("#{t('model.transaction.title.list')}"),
+        content: "<i class='fa fa-money'></i> <span class='menu-item-parent'>" + _("#{t('model.transaction.title.list')}") + "</span>",
+        children: transaction_children
+      })
+
+      sidebar_menus = sidebar_menus | transaction_menus
+
       # group member
 
       member_children = Array.new

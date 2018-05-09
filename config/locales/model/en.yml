@@ -87,3 +87,24 @@ en:
         add_success: "Member was successfully add"
         deleted_success: "Member was successfully deleted"
 
+    transaction:
+      model_name: "Transaction"
+      controller_name: "Transactions"
+      type:
+        created_at: "Date"
+        amount: "Amount"
+        description: "Description"
+        category_id: "Category"
+        type_id: "Type"
+      title:
+        list: "Transactions"
+        add: "Add Transaction"
+        update: "Update Transaction"
+        delete: "Delete Transaction"
+      message:
+        not_found: "Transaction not found"
+        add_success: "Transaction was successfully created"
+        update_success: "Transaction was successfully updated"
+        deleted_success: "Transaction was successfully deleted"
+
+

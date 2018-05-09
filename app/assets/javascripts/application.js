@@ -39,3 +39,9 @@
 //= require bootstrap-tagsinput
 //= require twitter/typeahead
 //= require twitter/typeahead.min
+
+//= require plugin/datatables/jquery.dataTables
+//= require plugin/datatables/dataTables.colVis
+//= require plugin/datatables/dataTables.tableTools
+//= require plugin/datatables/dataTables.bootstrap
+//= require plugin/datatable-responsive/datatables.responsive

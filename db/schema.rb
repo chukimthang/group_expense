@@ -10,22 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508103140) do
+ActiveRecord::Schema.define(version: 20180508165043) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "expenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.float "price", limit: 24, null: false
-    t.text "description"
-    t.integer "category_id", default: 0
-    t.integer "group_id", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "is_deleted", default: false
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -37,20 +27,21 @@ ActiveRecord::Schema.define(version: 20180508103140) do
     t.integer "create_by_user", null: false
   end
 
-  create_table "incomes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.float "amount_of_money", limit: 24, default: 0.0
-    t.text "description"
-    t.integer "group_id", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "is_deleted", default: false
-  end
-
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name", null: false
     t.boolean "is_shared", default: false
     t.integer "category_id", default: 0
     t.integer "group_id", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.float "amount", limit: 24, null: false
+    t.text "description"
+    t.integer "category_id", default: 0
+    t.integer "group_id", default: 0
+    t.integer "type_id", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
