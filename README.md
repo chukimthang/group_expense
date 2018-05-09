@@ -43,6 +43,9 @@
 - Apply Bootstrap Tags Input
 - User hidden field with value = []
 - User JSON Javascript
+9. Listing transaction
+- Apply dataTable
+- Drop table with migration
 
 ## Note
 #### JSON Javascript

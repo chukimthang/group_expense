@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
     resources :group_members, only: [:index, :create, :destroy], path: '/group-members'
     get "users/get_user", to: "users#get_user_ajax", constraint: OnlyAjaxRequest.new
+
+    resources :transactions
   end
   
   get "groups/:id", to: "groups#get_group_ajax", constraint: OnlyAjaxRequest.new
