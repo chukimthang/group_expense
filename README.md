@@ -49,6 +49,11 @@
 9. Listing transaction
 - Apply dataTable
 - Drop table with migration
+10. Add Update Delete Transaction
+- Apply moment js
+- Load view by ajax
+- Use event js with onChange
+- Apply DATE_FORMAT in scope model (scope by_date by function search date)
 
 ## Note
 #### JSON Javascript
