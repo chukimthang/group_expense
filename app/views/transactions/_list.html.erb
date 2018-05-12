@@ -1,58 +1,69 @@
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover dataTable no-footer" 
-    id="table_transaction">
-    <thead>
-      <tr>
-        <th class="col-sm-1"><%= t("common.form.no") %></th>
-        <th class="col-sm-2"><%= t("model.transaction.type.created_at") %></th>
-        <th class="col-sm-2"><%= t("model.transaction.type.amount") %></th>
-        <th class="col-sm-2"><%= t("model.transaction.type.type_id") %></th>
-        <th class="col-sm-4"><%= t("model.transaction.type.description") %></th>
-        <th class="col-sm-1"><%= t("common.form.action") %></th>
-      </tr>
-    </thead>
+<%= render "summary" %> 
 
-    <tbody>
-      <% if @transactions.any? %>
-        <% @start_count = 1 %>
-
-        <% @transactions.each do |transaction| %>
-          <tr>
-            <td><%= @start_count %></td>
-            <td><%= transaction.created_at.strftime("%m/%d/%Y") %></td>
-            <td>
-              <% number = number_to_currency(transaction.amount, :unit => "đ ") %>
-              <% if transaction.type_id == "Expense" %>
-                <span class="expense">- <%= number %></span>
-              <% else %>
-                <span class="income">+ <%= number %></span>
-              <% end %>  
-            </td>
-            <td><%= transaction.type_id %></td>
-            <td><%= transaction.description %></td>
-            <td>
-              <a href="#" data-toggle="modal" data-target="#transaction_form" 
-                class="transactions_edit" data-id="<%= transaction.id %>">
-                <i class="fa fa-pencil-square-o custom-action-icon-green
-                  custom-action-icon-edit">
-                </i>
-              </a>
-
-              <a href="#modal-deletion" data-placement="right" 
-                data-toggle="modal" data-id="<%= transaction.id %>">
-                <i class="glyphicon glyphicon-trash glyphicon" 
-                  data-id="<%= transaction.id %>"></i>
-              </a>
-            </td>
-          </tr>
-
-          <% @start_count += 1 %>
-        <% end %>
-      <% else %>
+<div class="col-md-12 table-responsive" id="table_wapper">
+  <div class="row">
+    <table class="table table-striped table-bordered table-hover dataTable 
+      no-footer display" id="table_transaction">
+      <thead>
         <tr>
-          <td colspan="6" align="center"><%= t("common.table.empty") %></td>
+          <th width="7%"><%= t("common.form.no") %></th>
+          <th width="13%"><%= t("model.transaction.type.created_at") %></th>
+          <th width="15%"><%= t("model.transaction.type.amount") %></th>
+          <th><%= t("model.transaction.type.description") %></th>
+          <th width="15%"><%= t("model.transaction.type.update_by_user") %></th>
+          <th width="12%"><%= t("model.transaction.type.type_id") %></th>
+          <th width="8%"><%= t("common.form.action") %></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% if @transactions.any? %>
+          <% @start_count = 1 %>
+
+          <% @transactions.each do |transaction| %>
+            <tr>
+              <td><%= @start_count %></td>
+              <td><%= transaction.updated_at.strftime("%m/%d/%Y") %></td>
+              <td>
+                <% number = number_to_currency(transaction.amount, :unit => "đ ") %>
+                <% if transaction.type_id == "Expense" %>
+                  <span class="expense">- <%= number %></span>
+                <% else %>
+                  <span class="income">+ <%= number %></span>
+                <% end %>  
+              </td>
+              <td><%= transaction.description %></td>
+              <td><%= transaction.user.full_name %></td>
+              <td><%= transaction.type_id %></td>
+              <td>
+                <a href="#" data-toggle="modal" data-target="#transaction_form" 
+                  class="transaction_edit" data-id="<%= transaction.id %>">
+                  <i class="fa fa-pencil-square-o custom-action-icon-green
+                    custom-action-icon-edit">
+                  </i>
+                </a>
+
+                <a href="javascript: void(0)" class="transaction_delete" 
+                  data-id="<%= transaction.id %>">
+                  <i class="glyphicon glyphicon-trash glyphicon" 
+                    data-id="<%= transaction.id %>"></i>
+                </a>
+              </td>
+            </tr>
+
+            <% @start_count += 1 %>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="6" align="center"><%= t("common.table.empty") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<%= render "current_money" %>
+
+
+

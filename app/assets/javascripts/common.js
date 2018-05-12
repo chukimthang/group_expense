@@ -35,4 +35,10 @@ function isComparePassWord(field, rules, i, options) {
   }
 }
 
+function hidenErrorDateRange(targetid, sourceid) {
+  if ($('#' + targetid).validationEngine('validate')){
+    $('#' + sourceid).validationEngine('hide');
+    $('#' + sourceid).removeClass("has-error");
+  }
+}
 

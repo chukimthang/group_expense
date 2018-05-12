@@ -18,6 +18,9 @@
 - Css typeahead: https://github.com/bassjobsen/typeahead.js-bootstrap-css/blob/master/typeaheadjs.css
 - Gem bootstrap-tokenfield-rails: https://github.com/icicletech/bootstrap-tokenfield-rails
 - Doc bootstrap-tokenfield: http://sliptree.github.io/bootstrap-tokenfield/
+5. Moment js
+- Gem: https://github.com/derekprior/momentjs-rails
+- Doc: https://momentjs.com/
 
 ## Content
 1. Static page

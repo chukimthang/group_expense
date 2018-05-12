@@ -29,12 +29,21 @@
     </header>
 
     <div class="wg-content">
-      <div class="row listing-container">
+      <div class="row search-content" id="transaction-search">
+        <%= render "search" %>
+      </div>
+      <div class="row listing-container" id="list_transaction">
         <%= render "list" %>
       </div>
     </div>
   </div>
 </article>
 
-<%= render "script_datatable" %>
+<% if @transactions.any? %>
+  <%= render "script_datatable" %>
+<% end %>
 
+<%= render "form" %>
+<%= render "shared/dialog"%>
+<%= render "shared/dialog_success"%>
+<%= render "script" %>

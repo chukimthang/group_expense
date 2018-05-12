@@ -17,6 +17,10 @@ en:
       delete_confirm_msg: "Are you sure to delete this record?"
       add_resource: "Add %{resource}"
       error: "Error"
+      notification_box_title: "Notification!"
+      choose: " -- Choose -- "
+      reset: "Reset"
+
     home: "Home"
     message:
     menu:
@@ -30,6 +34,8 @@ en:
     actived: "Actived"
     active: "Active"
     inactived: "Inactive"
+    current_money: "Current Money: "
+    success: "Success"
 
     constant_js:
       validate_format_date: "* Please enter date in MM/dd/yyyy format."
