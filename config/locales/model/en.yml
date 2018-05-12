@@ -96,11 +96,20 @@ en:
         description: "Description"
         category_id: "Category"
         type_id: "Type"
+        update_by_user: "User"
+        list_type: 
+          expense: Expense
+          income: Income
+          saved: "Saved"
       title:
         list: "Transactions"
         add: "Add Transaction"
         update: "Update Transaction"
         delete: "Delete Transaction"
+      label:
+        choose_product: "Choose Option"
+        from_date: "From Date"
+        to_date: "To Date" 
       message:
         not_found: "Transaction not found"
         add_success: "Transaction was successfully created"

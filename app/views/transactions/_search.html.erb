@@ -1,0 +1,58 @@
+<%= form_for :transaction, :html=> {:id => "frm_search_transaction", :method => "GET", 
+  :enforce_utf8 => false, :class => "form-horizontal"} do |f| %>
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :from_date, t("model.transaction.label.from_date"), class: "col-md-4 control-label" %>
+
+      <div class="col-md-6">
+        <label class="input"><i class="icon-append fa fa-calendar"></i>
+          <%= f.text_field :from_date, {class: "datepicker form-control 
+            validate[funcCall[isDate], dateRange[version_date]]", 
+            id: "start_date", name: "from_date",
+            "data-dateformat" => "mm/dd/yy", placeholder: "MM/DD/YYYY", 
+            onchange: "hidenErrorDateRange('start_date', 'end_date');"} %>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :to_date, t("model.transaction.label.to_date"), class: "col-md-4 control-label" %>
+
+      <div class="col-md-6">
+        <label class="input"><i class="icon-append fa fa-calendar"></i>
+          <%= f.text_field :to_date, {class: "datepicker form-control 
+            validate[funcCall[isDate], dateRange[version_date]]", name: "to_date", id: "end_date",
+            "data-dateformat" => "mm/dd/yy", placeholder: "MM/DD/YYYY", 
+            onchange: "hidenErrorDateRange('start_date', 'end_date');"} %>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :type_id, t("model.transaction.label.type_id"), class: "col-md-4 control-label" %>
+
+      <div class="col-md-6">
+        <%= f.select :type_id, @types_search, {}, {class: "form-control", name: "type_id"} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :category_id, t("model.transaction.type.category_id"), class: "col-md-4 control-label" %>
+
+      <div class="col-md-6 custom-chosen">
+        <%= f.collection_select :category_id, @categories_search, :id, :name.to_s,
+          {prompt: false}, {class: "chosen-select form-control", name: "category_id"} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-5 col-sm-offset-5">
+    <button type="button" class="btn custom-btn-green search"><%= t("common.form.search") %></button>
+    <button type="button" class="btn btn-default reset"><%= t("common.form.reset") %></button>
+  </div>
+<% end %>
+<div class="clearfix"></div>
+
+

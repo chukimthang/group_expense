@@ -1,0 +1,12 @@
+<div class="col-md-12 current_money text-align-center">
+  <% number = number_to_currency(@current_money, :unit => "đ ") %>
+  <%= t("common.current_money") %>
+  
+  <% if @current_money.to_i > 0 %>
+    <span class="income">+ <%= number %></span>
+  <% elsif @current_money.to_i == 0 %>
+    <span class="income"><%= number %></span>
+  <% else %>
+    <span class="expense"><%= number %></span>
+  <% end %>
+</div>

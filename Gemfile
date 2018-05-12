@@ -43,4 +43,5 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'chosen-rails'
 gem 'bootstrap-tagsinput-rails'
 gem 'twitter-typeahead-rails'
+gem 'momentjs-rails'
 

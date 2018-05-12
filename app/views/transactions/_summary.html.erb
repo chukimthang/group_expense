@@ -1,0 +1,30 @@
+<div class="summary">
+  <div class="row">
+    <div class="col-md-4 col-xs-4 text-align-left">
+      <%= t("model.transaction.type.list_type.income") %> : 
+      <span class="income">
+        + <%= number_to_currency(@summary_income, :unit => "đ ") %>
+      </span>
+    </div>
+
+    <div class="col-md-4 col-xs-4 text-align-center">
+      <%= t("model.transaction.type.list_type.expense") %> :
+      <span class="expense">
+        - <%= number_to_currency(@summary_expense, :unit => "đ ") %>
+      </span>
+    </div>
+
+    <div class="col-md-4 col-xs-4 text-align-right">
+      <% number = number_to_currency(@summary_saved, :unit => "đ ") %>
+        <%= t("model.transaction.type.list_type.saved") %> :
+        
+        <% if @summary_saved.to_i > 0 %>
+          <span class="income"> + <%= number %></span>
+        <% elsif @summary_saved.to_i == 0 %>
+          <span class="income"> <%= number %></span>
+        <% else %>
+          <span class="expense"> <%= number %></span>
+        <% end %>
+    </div>
+  </div>
+</div>

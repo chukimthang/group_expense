@@ -123,7 +123,7 @@ label.error {
 }
 
 .form-horizontal input[type="checkbox"] {
-  margin: 10px 0 0;
+  margin: 10px 0 10px;
 }
 
 .user-type-option-label {
@@ -167,4 +167,29 @@ span.expense {
 
 span.income {
   color: #51b44f;
+}
+
+span.label_check_product {
+  margin-right: 15px;
+}
+
+#frm_transaction input[type="radio"] {
+  margin: 10px 0 0 10px;
+}
+
+#list_transaction .current_money {
+  font-weight: bold; 
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.ui-dialog.ui-corner-all.ui-widget.ui-widget-content {
+  top: 50px !important;
+}
+
+#list_transaction .summary {
+  font-weight: bold; 
+  margin-top: 10px; 
+  margin-bottom: 20px; 
+  font-size: 15px;
 }

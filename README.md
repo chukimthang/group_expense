@@ -18,6 +18,9 @@
 - Css typeahead: https://github.com/bassjobsen/typeahead.js-bootstrap-css/blob/master/typeaheadjs.css
 - Gem bootstrap-tokenfield-rails: https://github.com/icicletech/bootstrap-tokenfield-rails
 - Doc bootstrap-tokenfield: http://sliptree.github.io/bootstrap-tokenfield/
+5. Moment js
+- Gem: https://github.com/derekprior/momentjs-rails
+- Doc: https://momentjs.com/
 
 ## Content
 1. Static page
@@ -46,6 +49,11 @@
 9. Listing transaction
 - Apply dataTable
 - Drop table with migration
+10. Add Update Delete Transaction
+- Apply moment js
+- Load view by ajax
+- Use event js with onChange
+- Apply DATE_FORMAT in scope model (scope by_date by function search date)
 
 ## Note
 #### JSON Javascript

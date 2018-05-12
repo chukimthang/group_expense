@@ -33,11 +33,13 @@ Rails.application.routes.draw do
 
     resources :products, except: [:show, :new, :edit]
     get "products/:id", to: "products#get_product_ajax", constraint: OnlyAjaxRequest.new
+    post "products/post_product_by_category", to: "products#post_product_by_category_ajax", constraint: OnlyAjaxRequest.new
 
     resources :group_members, only: [:index, :create, :destroy], path: '/group-members'
     get "users/get_user", to: "users#get_user_ajax", constraint: OnlyAjaxRequest.new
 
-    resources :transactions
+    resources :transactions, except: [:new, :edit, :show]
+    post "transactions/get_transaction", to: "transactions#get_transaction_ajax", constraint: OnlyAjaxRequest.new
   end
   
   get "groups/:id", to: "groups#get_group_ajax", constraint: OnlyAjaxRequest.new

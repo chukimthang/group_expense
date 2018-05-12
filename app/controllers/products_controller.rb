@@ -98,6 +98,13 @@ class ProductsController < ApplicationController
     end
   end
 
+  def post_product_by_category_ajax
+    @products = Product.by_group(params[:group_id].to_i)
+                      .by_category(params[:category_id].to_i)
+
+    render template: "transactions/_product_checkbox", layout: false
+  end
+
   private
   def product_params
     if params[:product][:is_shared].to_i == 1

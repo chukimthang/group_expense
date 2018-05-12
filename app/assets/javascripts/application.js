@@ -45,3 +45,5 @@
 //= require plugin/datatables/dataTables.tableTools
 //= require plugin/datatables/dataTables.bootstrap
 //= require plugin/datatable-responsive/datatables.responsive
+
+//= require moment

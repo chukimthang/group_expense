@@ -1,0 +1,322 @@
+<% content_for :scripts do %>
+  <script type="application/javascript">
+    var group_id = <%= params[:group_id] %>
+
+    $(document).ready(function() {
+      initChosen("category_id");
+      initChosen("transaction_category_id");
+      setParamsSearch();
+
+      $("#frm_transaction").validationEngine({
+        promptPosition: "inline",
+        addSuccessCssClassToField: "no-error",
+        addFailureCssClassToField: "has-error",
+        validateNonVisibleFields: true,
+        prettySelect : true,
+        useSuffix: "_chosen"
+      });
+
+      $("#frm_search_transaction").validationEngine({
+        promptPosition: "inline",
+        addSuccessCssClassToField: "no-error",
+        addFailureCssClassToField: "has-error",
+        validateNonVisibleFields: true
+      });
+
+      $("input[type=radio][name='transaction[type_id]']").on("change", function() {
+        if (this.value == "1") {
+          resetForm();
+          $(".income_hidden").show();
+          $(".chosen-select").addClass("validate[required]");
+        } else if (this.value == "2") {
+          resetForm();
+          $(".income_hidden").hide();
+          $(".chosen-select").removeClass("validate[required]");
+        }
+      });
+
+      $("#frm_transaction").on("change", "#category_id", function() {
+        var category_id = $(this).val();
+        $("#description").val("");
+        
+        if (category_id > 0) {
+          $("#product_box").show();
+          getProductByCategory(category_id);
+        } else {
+          $("#product_box").hide();
+        }
+      });
+
+      $("#frm_transaction").on("change", "input:checkbox", function() {
+        displayDescription();    
+      });
+
+      $(".transaction_add").on("click", function() {
+        resetForm();
+        $("#transaction_form_title").html("<%= t('model.transaction.title.add') %>");
+        $("#transaction_form_button").html("<%= t('common.form.add') %>");
+        $(".type_id").prop("disabled", false);
+      });
+
+      $("#list_transaction").on("click", ".transaction_edit", function() {
+        resetForm();
+        $("#transaction_form_title").html("<%= t('model.transaction.title.update') %>");
+        $("#transaction_form_button").html("<%= t('common.form.update') %>");
+
+        var id = $(this).data("id");
+        showFormEdit(id);
+      });
+
+      $("#transaction_form_button").on("click", function() {
+        onSave();
+      });
+
+      $("#list_transaction").on("click", ".transaction_delete", function() {
+        resetForm();
+        var id = $(this).data("id");
+        displayDialogDelete(id);
+      });
+
+      $("#frm_search_transaction").on("click", ".reset", function() {
+        resetSearch();
+      });
+
+      $("#frm_search_transaction").on("click", ".search", function() {
+        $("#frm_search_transaction").submit();
+      });
+    });
+
+    function setParamsSearch() {
+      <% unless params[:from_date].blank? %>
+        var from_date = moment('<%= params[:from_date] %>').format('L');
+      <% else %>
+        var from_date = "";
+      <% end %>
+
+      <% unless params[:to_date].blank? %>
+        var to_date = moment('<%= params[:to_date] %>').format('L');
+      <% else %>
+        var to_date = "";
+      <% end %>
+
+      <% unless params[:type_id].blank? %>
+        var type_id = "<%= params[:type_id] %>";
+      <% else %>
+        var type_id = 0;
+      <% end %>
+
+      <% unless params[:category_id].blank? %>
+        var category_id = "<%= params[:category_id] %>";
+      <% else %>
+        var category_id = 0;
+      <% end %>
+
+      $("#start_date").val(from_date);
+      $("#end_date").val(to_date);
+      $("#transaction_type_id").val(type_id);
+      $("#transaction_category_id").val(category_id);
+      $("#transaction_category_id").trigger("chosen:updated");
+    }
+
+    function resetForm() {
+      $("#amount").val("");
+      $("input:checkbox").removeAttr('checked');
+      $("#description").val("");
+      $("#category_id").val("");
+      $("#category_id").trigger("chosen:updated");
+      $("#product_box").hide();
+
+      $(".formError").remove();
+      $(".has-error").css('border-color','#cccccc');
+      $(".customErrorContent").html("");
+    }
+
+    function resetSearch() {
+      $("#start_date").val("");
+      $("#end_date").val("");
+      $("#transaction_type_id").val(0);
+      $("#transaction_category_id").val(0);
+      $("#transaction_category_id").trigger("chosen:updated");
+    }
+
+    function getProductByCategory(category_id) {
+      data = {
+        category_id: category_id,
+        group_id: group_id
+      };
+      url = "/groups/" + group_id + "/products/post_product_by_category";
+
+      $.ajax({
+        url: url,
+        data: data,
+        cache: false,
+        type: "POST",
+        success: function(data){
+          $("#product_box").html(data);
+        }
+      });
+    }
+
+    function showFormEdit(id) {
+      data = {id: id};
+      url = "/groups/" + group_id + "/transactions/get_transaction";
+
+      $.ajax({
+        url: url,
+        data: data,
+        cache: false,
+        type: "POST",
+        success: function(data){
+          $("#transaction_id").val(id);
+          $("#amount").val(data.amount);
+          $("#category_id").val(data.category_id);
+          $("#category_id").trigger("chosen:updated");
+          $("#description").val(data.description);
+
+          if (data.type_id == "Expense") {
+            $("#type_expense").prop("checked", true);
+            $(".income_hidden").show();
+            $("#type_expense").prop("disabled", false);
+            $("#type_income").prop("disabled", true);
+            $("#product_box").hide();
+          } else {
+            $("#type_income").prop("checked", true);
+            $(".income_hidden").hide();
+            $("#type_expense").prop("disabled", true);
+            $("#type_income").prop("disabled", false);
+          }
+        }
+      });
+    }
+
+    function onSave() {
+      var status = $("#frm_transaction").validationEngine("validate");
+  
+      if(status == false){
+        return status;
+      }
+
+      var data = $("#frm_transaction").serialize();
+      var id = $("#transaction_id").val();
+
+      if (id > 0) {
+        $.ajax({
+          url: "/groups/" + group_id + "/transactions/" + id,
+          data: data,
+          cache: false,
+          type: "PATCH",
+          success: function(data){
+            // $("#transaction_form").modal('toggle');
+            // $("#list_transaction").html(data);
+            // var message = "<%= t('model.transaction.message.update_success') %>";
+            // displayDialogSuccess(message);
+            
+            window.location.replace("<%= group_transactions_path %>");
+          }
+        });
+      } else {
+        $.ajax({
+          url: "/groups/" + group_id + "/transactions",
+          data: data,
+          cache: false,
+          type: "POST",
+          success: function(data){
+            // $("#transaction_form").modal('toggle');
+            // $("#list_transaction").html(data);
+            // var message = "<%= t('model.transaction.message.add_success') %>";
+            // displayDialogSuccess(message);
+
+            window.location.replace("<%= group_transactions_path %>");
+          }
+        });
+      }
+
+      return true;
+    }
+
+    function displayDialogDelete(id) {
+      $("#dialog-messages").dialog({
+        closeOnEscape: false,
+        open: function(event, ui) {
+          $("#lblmessages").html("<%= t('common.form.delete_confirm_msg') %>");
+          $("#dialog-messages .alert").addClass("alert-warning");
+          $(".ui-dialog-titlebar-close", ui.dialog | ui)
+            .css("margin-top", "-10px")
+            .css("margin-right", "4px")
+            .css("color", "red");
+        },
+        width: 400,
+        modal: true,
+        buttons: [
+          {
+            id: "btnCancel",
+            text: "<%= t('common.form.delete') %>",
+            class: "btn btn-danger",
+            click: function () {
+              data = {
+                id: id
+              };
+              url = "/groups/" + group_id + "/transactions/" + id;
+
+              $.ajax({
+                url: url,
+                data: data,
+                cache: false,
+                type: "DELETE",
+                success: function (data) {
+                  // $("#list_transaction").html(data);
+                  // var message = "<%= t('model.transaction.message.deleted_success') %>";
+                  // displayDialogSuccess(message); 
+
+                  window.location.replace("<%= group_transactions_path %>");
+                }
+              });
+              $(this).dialog('close');
+            }
+          },
+          {
+            id: "btnCancel",
+            text: "<%= t('common.form.cancel') %>",
+            class: "btn btn-default",
+            click: function () {
+              $(this).dialog('close');
+            }
+          }
+        ]
+      });
+    }
+
+    function displayDescription() {
+      var list_product_name = "";
+
+      $("input[type=checkbox]").each(function () {          
+        if(this.checked) {
+          var product_id = $(this).parent().data("product-id");
+          product_name = $("#product_name_" + product_id).html();
+          if (list_product_name != "") {
+            list_product_name += ", "
+          }
+          list_product_name += $.trim(product_name)
+        }
+      });
+
+      $("#description").val(list_product_name);
+    }
+
+    function displayDialogSuccess(message) {
+      $("#dialog-success").dialog({
+        closeOnEscape: false,
+        open: function(event, ui) {
+          $("#message-success").html(message);
+          $("#dialog-success .alert").addClass("alert-success");
+          $(".ui-dialog-titlebar-close", ui.dialog | ui)
+            .css("margin-top", "-10px")
+            .css("margin-right", "4px")
+            .css("color", "red");
+        },
+        width: 400,
+        modal: true
+      });
+    }
+  </script>
+<% end %>
