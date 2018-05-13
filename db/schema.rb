@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20180508165046) do
 
-  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.float "saved_money", limit: 24, default: 0.0
     t.datetime "created_at", null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180508165046) do
     t.integer "create_by_user", null: false
   end
 
-  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.boolean "is_shared", default: false
     t.integer "category_id", default: 0
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180508165046) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.float "amount", limit: 24, null: false
     t.text "description"
     t.integer "category_id", default: 0
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20180508165046) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", default: 0
     t.integer "group_id", default: 0
     t.datetime "created_at", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20180508165046) do
     t.boolean "is_deleted", default: false
   end
 
-  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

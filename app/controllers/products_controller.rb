@@ -41,8 +41,8 @@ class ProductsController < ApplicationController
       @total_records = 0
     end
 
-    @categories = get_select_categories
-    @categories_select = get_select_categories true
+    @categories = get_select_categories true, false
+    @categories_select = get_select_categories true, true
   end
 
   def create

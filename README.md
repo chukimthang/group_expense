@@ -54,6 +54,14 @@
 - Load view by ajax
 - Use event js with onChange
 - Apply DATE_FORMAT in scope model (scope by_date by function search date)
+11. Update charset migrate
+- rails db:migration
+- rails db:seed
+
+- bin/rails db:environment:set RAILS_ENV=development
+- rails db:drop
+- rails db:setup
+- rails db:seed
 
 ## Note
 #### JSON Javascript
