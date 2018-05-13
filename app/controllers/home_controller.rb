@@ -15,9 +15,6 @@ class HomeController < ApplicationController
       end
     end
 
-    # logger.debug "group_ids = #{group_ids.inspect}"
-    # byebug
-
     unless group_ids.empty?
       group_ids = group_ids.join(',')
       
