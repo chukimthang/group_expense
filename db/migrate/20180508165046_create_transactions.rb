@@ -1,6 +1,6 @@
 class CreateTransactions < ActiveRecord::Migration[5.1]
   def change
-    create_table :transactions do |t|
+    create_table :transactions, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
       t.float :amount, null: false
       t.text :description
       t.integer :category_id, default: 0

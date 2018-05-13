@@ -27,11 +27,11 @@
         if (this.value == "1") {
           resetForm();
           $(".income_hidden").show();
-          $(".chosen-select").addClass("validate[required]");
+          $("#category_id").addClass("validate[required]");
         } else if (this.value == "2") {
           resetForm();
           $(".income_hidden").hide();
-          $(".chosen-select").removeClass("validate[required]");
+          $("#category_id").removeClass("validate[required]");
         }
       });
 
@@ -179,11 +179,13 @@
             $("#type_expense").prop("disabled", false);
             $("#type_income").prop("disabled", true);
             $("#product_box").hide();
+            $("#category_id").addClass("validate[required]");
           } else {
             $("#type_income").prop("checked", true);
             $(".income_hidden").hide();
             $("#type_expense").prop("disabled", true);
             $("#type_income").prop("disabled", false);
+            $("#category_id").removeClass("validate[required]");
           }
         }
       });
