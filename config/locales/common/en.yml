@@ -36,6 +36,7 @@ en:
     inactived: "Inactive"
     current_money: "Current Money: "
     success: "Success"
+    group_blocked: "Group was blocked"
 
     constant_js:
       validate_format_date: "* Please enter date in MM/dd/yyyy format."

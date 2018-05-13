@@ -25,18 +25,20 @@
 
             <td><%= product.name %></td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#product_form" 
-                class="product_edit" data-id="<%= product.id %>">
-                <i class="fa fa-pencil-square-o custom-action-icon-green
-                  custom-action-icon-edit">
-                </i>
-              </a>
+              <% if (product.is_shared && current_user.is_admin) || !product.is_shared %>
+                <a href="#" data-toggle="modal" data-target="#product_form" 
+                  class="product_edit" data-id="<%= product.id %>">
+                  <i class="fa fa-pencil-square-o custom-action-icon-green
+                    custom-action-icon-edit">
+                  </i>
+                </a>
 
-              <a href="#modal-deletion" data-placement="right" 
-                data-toggle="modal" data-id="<%= product.id %>">
-                <i class="glyphicon glyphicon-trash glyphicon" 
-                  data-id="<%= product.id %>"></i>
-              </a>
+                <a href="#modal-deletion" data-placement="right" 
+                  data-toggle="modal" data-id="<%= product.id %>">
+                  <i class="glyphicon glyphicon-trash glyphicon" 
+                    data-id="<%= product.id %>"></i>
+                </a>
+              <% end %>
             </td>
           </tr>
           <% @start_count += 1 %>
@@ -51,7 +53,7 @@
 </div>
 
 <div class="text-align-center custom-kaminari">
-  <% unless @products.nil? %>
+  <% if @products.any? %>
     <%= paginate @products %>
   <% end %>
 </div>

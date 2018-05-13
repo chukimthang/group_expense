@@ -14,31 +14,35 @@
         <% @groups.each do |group| %>
           <tr>
             <td><%= @start_count %></td>
-            <td><a href="<%= group_transactions_path(group_id: group.id) %>">
+            <td><a href="javascript:void(0)" 
+              class="group_name" data-id="<%= group.id %>" 
+              data-is-blocked="<%= group.is_deleted %>">
               <%= group.name %></a></td>
             <td><%= group.created_at.strftime("%m/%d/%Y") %></td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#group_form" 
-                class="group_edit" data-id="<%= group.id %>">
-                <i class="fa fa-pencil-square-o custom-action-icon-green
-                  custom-action-icon-edit">
-                </i>
-              </a>
+              <% if group.create_by_user ==  current_user.id %>
+                <a href="#" data-toggle="modal" data-target="#group_form" 
+                  class="group_edit" data-id="<%= group.id %>">
+                  <i class="fa fa-pencil-square-o custom-action-icon-green
+                    custom-action-icon-edit">
+                  </i>
+                </a>
 
-              <a href="#" class="blocked-group" id="blocked-group-<%= group.id %>" 
-                data-id="<%= group.id %>">
-                <% if group.is_deleted? %>
-                  <i class="fa fa-lock fa-lg"></i>
-                <% else %>
-                  <i class="fa fa-unlock-alt fa-lg"></i>
-                <% end %>
-              </a>
+                <a href="#" class="blocked-group" id="blocked-group-<%= group.id %>" 
+                  data-id="<%= group.id %>">
+                  <% if group.is_deleted? %>
+                    <i class="fa fa-lock fa-lg"></i>
+                  <% else %>
+                    <i class="fa fa-unlock-alt fa-lg"></i>
+                  <% end %>
+                </a>
 
-              <a href="#modal-deletion" data-placement="right" 
-                data-toggle="modal" data-id="<%= group.id %>">
-                <i class="glyphicon glyphicon-trash glyphicon" 
-                  data-id="<%= group.id %>"></i>
-              </a>
+                <a href="#modal-deletion" data-placement="right" 
+                  data-toggle="modal" data-id="<%= group.id %>">
+                  <i class="glyphicon glyphicon-trash glyphicon" 
+                    data-id="<%= group.id %>"></i>
+                </a>
+              <% end %>
             </td>
           </tr>
           <% @start_count += 1 %>
@@ -53,7 +57,7 @@
 </div>
 
 <div class="text-align-center custom-kaminari">
-  <% unless @groups.nil? %>
+  <% if @groups.any? %>
     <%= paginate @groups %>
   <% end %>
 </div>
