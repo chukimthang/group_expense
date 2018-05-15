@@ -17,18 +17,20 @@
             <td><%= category.name %> </td>
             <td><%= category.created_at.strftime("%m/%d/%Y") %></td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#category_form" 
-                class="category_edit" data-id="<%= category.id %>">
-                <i class="fa fa-pencil-square-o custom-action-icon-green
-                  custom-action-icon-edit">
-                </i>
-              </a>
+              <% if current_user.is_admin %>
+                <a href="#" data-toggle="modal" data-target="#category_form" 
+                  class="category_edit" data-id="<%= category.id %>">
+                  <i class="fa fa-pencil-square-o custom-action-icon-green
+                    custom-action-icon-edit">
+                  </i>
+                </a>
 
-              <a href="#modal-deletion" data-placement="right" 
-                data-toggle="modal" data-id="<%= category.id %>">
-                <i class="glyphicon glyphicon-trash glyphicon" 
-                  data-id="<%= category.id %>"></i>
-              </a>
+                <a href="#modal-deletion" data-placement="right" 
+                  data-toggle="modal" data-id="<%= category.id %>">
+                  <i class="glyphicon glyphicon-trash glyphicon" 
+                    data-id="<%= category.id %>"></i>
+                </a>
+              <% end %>
             </td>
           </tr>
           <% @start_count += 1 %>

@@ -48,6 +48,13 @@ products.push(
   {id: 19, name: "Xà phòng tắm", is_shared: true, category_id: 4},
   {id: 20, name: "Bột giặt", is_shared: true, category_id: 4}
 )
-
 Product.create(products)
 
+user_groups = Array.new()
+user_groups.push(
+  {id: 1, user_id: 1, group_id: 1},
+  {id: 2, user_id: 2, group_id: 1},
+  {id: 3, user_id: 3, group_id: 1},
+  {id: 4, user_id: 4, group_id: 1}
+)
+UserGroup.create(user_groups)
