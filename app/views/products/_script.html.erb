@@ -68,6 +68,7 @@
       $("#category_id").val(0);
       $("#category_id").trigger("chosen:updated");
       $("#is_shared").prop("checked", false);
+      removeStyleErrorValidate();
     }
 
     function onChangePageSize(value) {

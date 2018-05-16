@@ -126,9 +126,7 @@
       $("#category_id").trigger("chosen:updated");
       $("#product_box").hide();
 
-      $(".formError").remove();
-      $(".has-error").css('border-color','#cccccc');
-      $(".customErrorContent").html("");
+      removeStyleErrorValidate();
     }
 
     function resetSearch() {
