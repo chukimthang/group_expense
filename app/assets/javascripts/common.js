@@ -42,3 +42,9 @@ function hidenErrorDateRange(targetid, sourceid) {
   }
 }
 
+function removeStyleErrorValidate() {
+  $(".formError").remove();
+  $(".has-error").css('border-color','#cccccc');
+  $(".customErrorContent").html("");
+}
+

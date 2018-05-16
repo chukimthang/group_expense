@@ -5,6 +5,44 @@
 - Create controller: rails generate controller Categories
 - Add column table db: rails generate migration add_is_deleted_to_categories is_deleted:boolean
 
+## Deploy Heroku
+1. Install CLI
+- Run command: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+- Doc: https://devcenter.heroku.com/articles/heroku-cli
+2. Install Nodejs (ver >= 8.0)
+- curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+- sudo apt-get install -y nodejs
+- Check: node -v, npm -v, heroku --version
+3. Clone code from github
+- git clone git@github.com:chukimthang/group_expense.git
+- cd group_expense
+4. Login heroku
+- Run command: heroku login (enter email and password heroku)
+5. Create new app heroku
+5.1. Create in url: https://dashboard.heroku.com/apps
+- Create app: Click New -> Enter App Name -> Click button Create App
+- Create database: Click app name -> Resources -> Find more add-ons -> Choose Heroku Postgres -> 
+  Install Heroku Postgres -> Enter app name -> Provision add-on
+5.2. Create by command
+- Run command: heroku create (create app + database + add remote)
+6. Add remote heroku (if execute method 5.1)
+- Run command: heroku git:clone -a sochitieu
+- Check: git remote -v
+7. Update gem file
+- Add gem: ruby '2.3.1'
+- Move gem 'mysql2' to group :development, :test do ... end
+- Add gem gem 'pg' and gem 'rails_12factor' to group :production...end
+- Delete line Gemfile.lock in .gitignore
+- Run bundle install
+8. Install heroku buildpacks
+- heroku buildpacks:set heroku/nodejs
+- heroku buildpacks:set heroku/ruby
+9. Push heroku
+- Git add -A, git commit -m "Deploy Heroku", git push heroku master
+10. Migration heroku
+- heroku run rake db:migrate
+- heroku run rake db:seed
+
 ## Libraries
 1. Chosen
 - Link: https://github.com/tsechingho/chosen-rails
