@@ -59,7 +59,9 @@ end
 - heroku buildpacks:set heroku/ruby
 
 **9. Push heroku**
-- Git add -A, git commit -m "Deploy Heroku", git push heroku master
+- Git add -A
+- git commit -m "Deploy Heroku"
+- git push heroku master
 
 **10. Migration heroku**
 - heroku run rake db:migrate
