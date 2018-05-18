@@ -1,3 +1,5 @@
+require 'faker'
+
 users = Array.new()
 users.push(
   {id: 1, email: "thangck94@gmail.com", password: "123456", is_admin: true, full_name: "Chử Kim Thắng"},
@@ -58,3 +60,17 @@ user_groups.push(
   {id: 4, user_id: 4, group_id: 1}
 )
 UserGroup.create(user_groups)
+
+transactions = Array.new
+(0..1000).each do |i|
+  transactions.push({
+    amount: Faker::Number.between(10000, 500000), 
+    description: Faker::StarWars.character, 
+    category_id: Faker::Number.between(0, 4), 
+    group_id: 1,
+    type_id: Faker::Number.between(1, 2),
+    user_id: Faker::Number.between(1, 4),
+    updated_at: Faker::Date.between(6.months.ago, Date.today)
+  })
+end
+Transaction.create(transactions)

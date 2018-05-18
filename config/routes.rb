@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
     resources :transactions, except: [:new, :edit, :show]
     post "transactions/get_transaction", to: "transactions#get_transaction_ajax", constraint: OnlyAjaxRequest.new
+    get "transactions/export", to: "transactions#export", as: :export_transactions
   end
   
   get "groups/:id", to: "groups#get_group_ajax", constraint: OnlyAjaxRequest.new
