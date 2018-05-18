@@ -20,6 +20,7 @@ en:
       notification_box_title: "Notification!"
       choose: " -- Choose -- "
       reset: "Reset"
+      export: "Export"
 
     home: "Home"
     message:

@@ -88,6 +88,9 @@ end
 - Gem: https://github.com/derekprior/momentjs-rails
 - Doc: https://momentjs.com/
 
+**6. RubyXL**
+- https://github.com/weshatheleopard/rubyXL
+
 ## Content
 **1. Static page**
 - Custom theme admin
@@ -138,6 +141,9 @@ end
 - rails db:drop
 - rails db:setup
 - rails db:seed
+
+**12. Export Excel Transaction**
+- Apply RubyXL export excel
 
 ## Note
 #### JSON Javascript

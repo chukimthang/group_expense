@@ -26,6 +26,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
 
 group :development do
@@ -53,4 +54,7 @@ gem 'chosen-rails'
 gem 'bootstrap-tagsinput-rails'
 gem 'twitter-typeahead-rails'
 gem 'momentjs-rails'
+gem 'rubyXL', '~> 3.3', '>= 3.3.21'
+
+
 

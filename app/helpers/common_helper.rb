@@ -2,6 +2,7 @@ module CommonHelper
   DEFAULT_PAGE_INDEX = 1
   FORMAT_DATE = "%m/%d/%Y"
   FORMAT_DATE_DB = "%Y-%m-%d"
+  FORMAT_DATE_FILE = "%m-%d-%Y-%H%M%S"
 
   # convert string to datetime
   def to_date(str_date)

@@ -82,7 +82,13 @@
       });
 
       $("#frm_search_transaction").on("click", ".search", function() {
-        $("#frm_search_transaction").submit();
+        var url = "<%= group_transactions_path %>";
+        $("#frm_search_transaction").attr("action", url).submit();
+      });
+
+      $("#frm_search_transaction").on("click", ".export", function() {
+        var url = "<%= group_export_transactions_path %>";
+        $("#frm_search_transaction").attr("action", url).submit();
       });
     });
 
