@@ -93,13 +93,7 @@ class TransactionsController < ApplicationController
   end
 
   def export
-    get_search_paramn
-
-    @transactions = Transaction.includes(:user).by_group(@group_id)
-                                              .by_category(@category_id)
-                                              .by_type(@type_id)
-                                              .by_date(@from_date, @to_date)
-                                              .order("updated_at desc")
+    list_transaction
 
     file_path_template = "#{Rails.root.to_s}/files/templates/transaction.xlsx"
     template = RubyXL::Parser.parse(file_path_template)
@@ -111,6 +105,9 @@ class TransactionsController < ApplicationController
 
     row_index = 4
     count = 1
+
+    fill_data_result worksheet, row_index
+
     if @transactions.any?
       @transactions.each do |transaction|
         fill_data_row worksheet, row_index, transaction, count
@@ -120,7 +117,7 @@ class TransactionsController < ApplicationController
     end
 
     (1..6).each do |col|
-      worksheet.change_column_horizontal_alignment(0, 'left')   
+      worksheet.change_column_horizontal_alignment(col, 'left')   
     end
 
     export_file_name = "transaction_#{DateTime.now.strftime(FORMAT_DATE_FILE)}.xlsx"
@@ -157,14 +154,28 @@ class TransactionsController < ApplicationController
   end
 
   def get_list_data
-    get_search_paramn
+    list_transaction
+   
+    @current_money = Group.find_by_id(@group_id).saved_money
+    @categories = get_select_categories true, false
+    
+    types = {t("common.form.all_selection") => 0}
+    @types_search = types.merge!(Transaction.type_ids)
+    @categories_search = get_select_categories true, true
+  end
+
+  def list_transaction
+    @group_id = params[:group_id].to_i
+    @from_date = to_date(params[:from_date]) unless params[:from_date].nil?
+    @to_date = to_date(params[:to_date]) unless params[:to_date].nil?
+    @type_id = params[:type_id] ? params[:type_id].to_i : 0
+    @category_id = params[:category_id] ? params[:category_id].to_i : 0
 
     @transactions = Transaction.includes(:user).by_group(@group_id)
                                               .by_category(@category_id)
                                               .by_type(@type_id)
                                               .by_date(@from_date, @to_date)
                                               .order("updated_at desc")
-
 
     @summary_income = 0
     @summary_expense = 0
@@ -177,21 +188,6 @@ class TransactionsController < ApplicationController
       end
     end
     @summary_saved = @summary_income - @summary_expense
-
-    @current_money = Group.find_by_id(@group_id).saved_money
-    @categories = get_select_categories true, false
-    
-    types = {t("common.form.all_selection") => 0}
-    @types_search = types.merge!(Transaction.type_ids)
-    @categories_search = get_select_categories true, true
-  end
-
-  def get_search_paramn
-    @group_id = params[:group_id].to_i
-    @from_date = to_date(params[:from_date]) unless params[:from_date].nil?
-    @to_date = to_date(params[:to_date]) unless params[:to_date].nil?
-    @type_id = params[:type_id] ? params[:type_id].to_i : 0
-    @category_id = params[:category_id] ? params[:category_id].to_i : 0
   end
 
   def fill_data_row worksheet, row_index, transaction, count
@@ -212,6 +208,16 @@ class TransactionsController < ApplicationController
 
     worksheet.add_cell(row_index, 6, transaction.type_id)
     add_border_to_cell worksheet, row_index, 6
+  end
+
+  def fill_data_result worksheet, row_index
+    worksheet.add_cell(row_index, 8, @summary_income)
+    add_border_to_cell worksheet, row_index, 8
+    worksheet.add_cell(row_index, 9, @summary_expense)
+    add_border_to_cell worksheet, row_index, 9
+    worksheet.add_cell(row_index, 10, @summary_saved)
+    add_border_to_cell worksheet, row_index, 10
+    worksheet.sheet_data[row_index][10].change_border(:right, 'thin')
   end
 
   def add_border_to_cell sheet, row, col
