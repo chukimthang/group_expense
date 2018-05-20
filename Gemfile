@@ -55,6 +55,3 @@ gem 'bootstrap-tagsinput-rails'
 gem 'twitter-typeahead-rails'
 gem 'momentjs-rails'
 gem 'rubyXL', '~> 3.3', '>= 3.3.21'
-
-
-
