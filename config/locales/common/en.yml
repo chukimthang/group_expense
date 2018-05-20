@@ -21,6 +21,7 @@ en:
       choose: " -- Choose -- "
       reset: "Reset"
       export: "Export"
+      download: "Download"
 
     home: "Home"
     message:

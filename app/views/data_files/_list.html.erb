@@ -1,0 +1,55 @@
+<div class="col-md-12 table-responsive" id="table_wapper">
+  <div class="row">
+    <table class="table table-striped table-bordered table-hover dataTable 
+      no-footer display" id="table-data-file">
+      <thead>
+        <tr>
+          <th width="7%"><%= t("common.form.no") %></th>
+          <th width="15%"><%= t("model.data_file.created_date") %></th>
+          <th><%= t("model.data_file.type.file_name") %></th>
+          <th><%= t("model.data_file.type.user_id") %></th>
+          <th><%= t("model.data_file.type.group_id") %></th>
+          <th width="10%"><%= t("model.transaction.type.type_action_id") %></th>
+          <th width="8%"><%= t("common.form.action") %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if @data_files.any? %>
+          <% @start_count = 1 %>
+          <% created_date_array = [] %>
+
+          <% @data_files.each do |data_file| %>
+            <tr>
+              <td><%= @start_count %></td>
+              <td><%= data_file.created_at.strftime("%m/%d/%Y") %></td>
+              <td><a href="<%= download_data_file_path(:id => data_file.id) %>">
+                <%= data_file.file_name %></a></td>
+              <td><%= data_file.user.full_name %></td>
+              <td><%= data_file.group.name %></td>
+              <td><%= data_file.type_action_id %></td>
+              <td>
+                <a href="<%= download_data_file_path(:id => data_file.id) %>">
+                  <i class="glyphicon glyphicon-download-alt" data-toggle="tooltip" data-placement="top" title="<%= t("common.form.download") %>"></i>
+                </a>
+
+                <a href="#modal-deletion" class="data-file-delete" 
+                  data-id="<%= data_file.id %>" data-toggle="modal">
+                  <i class="glyphicon glyphicon-trash glyphicon" 
+                    data-id="<%= data_file.id %>" data-toggle="tooltip" 
+                    data-placement="top" title="<%= t("common.form.delete") %>"></i>
+                </a>
+              </td>
+            </tr>
+
+            <% @start_count += 1 %>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="8" align="center"><%= t("common.table.empty") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

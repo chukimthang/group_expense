@@ -126,7 +126,12 @@ class TransactionsController < ApplicationController
     file_path_temp = "#{dir}/#{export_file_name}"
 
     workbook.write(file_path_temp)
-   
+
+    # create log file
+    file_path_log = "/tmp/files/export/#{export_file_name}"
+    create_data_file(export_file_name, file_path_log, current_user.id, 
+      @group_id, DataFile.type_action_ids[:Export])
+
     send_file file_path_temp, :type => "application/excel", :x_sendfile => true
   end
 
@@ -167,7 +172,7 @@ class TransactionsController < ApplicationController
   def list_transaction
     @group_id = params[:group_id].to_i
     @from_date = to_date(params[:from_date]) unless params[:from_date].nil?
-    @to_date = to_date(params[:to_date]) + 1.days - 1.second unless params[:to_date].nil?
+    @to_date = to_date(params[:to_date]) unless params[:to_date].nil?
     @type_id = params[:type_id] ? params[:type_id].to_i : 0
     @category_id = params[:category_id] ? params[:category_id].to_i : 0
 

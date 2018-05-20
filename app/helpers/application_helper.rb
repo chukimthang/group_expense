@@ -143,6 +143,13 @@ module ApplicationHelper
       controller: 'users'
     })
 
+    administration_children.push({
+      href: data_files_path,
+      title: _("#{t('model.data_file.controller_name')}"),
+      content: "<i class='fa fa-files-o'></i> <span class='menu-item-parent'>" + _("#{t('model.data_file.controller_name')}") + "</span>",
+      controller: 'data_files'
+    })
+
     administration_menus = Array.new
     administration_menus.push({
       href: "#",
@@ -153,8 +160,6 @@ module ApplicationHelper
     sidebar_menus = sidebar_menus | administration_menus
 
     unless params[:group_id].nil?
-      # Transaction
-
       transaction_children = Array.new
       transaction_children.push({
         href: group_transactions_path,

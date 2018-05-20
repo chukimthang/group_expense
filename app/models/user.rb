@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :group_members
   has_many :transactions
+  has_many :data_files
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

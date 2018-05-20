@@ -57,7 +57,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    count_category_in_expense = Expense.where(is_deleted: false, category_id: @category.id).count
+    count_category_in_expense = Transaction.where(category_id: @category.id).count
     count_category_in_product = Product.where(category_id: @category.id).count
 
     if count_category_in_expense == 0 && count_category_in_product == 0
