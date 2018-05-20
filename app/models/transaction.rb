@@ -12,10 +12,6 @@ class Transaction < ApplicationRecord
   scope :by_category, ->(category_id){ category_id > 0 ? where(category_id: category_id) : all }
   scope :by_type, ->(type_id){ type_id > 0 ? where(type_id: type_id) : all }
   scope :by_date, ->(from_date, to_date){ 
-    if from_date.blank? && to_date.blank?
-      all
-    else 
-      where("DATE_FORMAT(updated_at, '%Y-%m-%d') >= '#{from_date}' AND DATE_FORMAT(updated_at, '%Y-%m-%d') <= '#{to_date}'") 
-    end
+    from_date.blank? && to_date.blank? ? all : where(updated_at: from_date..to_date)
   }
 end

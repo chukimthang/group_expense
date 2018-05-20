@@ -167,7 +167,7 @@ class TransactionsController < ApplicationController
   def list_transaction
     @group_id = params[:group_id].to_i
     @from_date = to_date(params[:from_date]) unless params[:from_date].nil?
-    @to_date = to_date(params[:to_date]) unless params[:to_date].nil?
+    @to_date = to_date(params[:to_date]) + 1.days - 1.second unless params[:to_date].nil?
     @type_id = params[:type_id] ? params[:type_id].to_i : 0
     @category_id = params[:category_id] ? params[:category_id].to_i : 0
 
