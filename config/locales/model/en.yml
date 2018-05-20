@@ -116,4 +116,20 @@ en:
         update_success: "Transaction was successfully updated"
         deleted_success: "Transaction was successfully deleted"
 
-
+    data_file:
+      model_name: "Data File"
+      controller_name: "Data Files"
+      type:
+        file_name: "File Name"
+        file_path: "File Path"
+        user_id: "User"
+        group_id: "Group"
+        type_action_id: "Type Action"
+        created_at: "Created Date"
+      title:
+        list: "Data File List"
+        delete: "Delete Files"
+      message:
+        not_found: "File not found"
+        path_not_found: "Filepath not found"
+        deleted_success: "File was successfully deleted"

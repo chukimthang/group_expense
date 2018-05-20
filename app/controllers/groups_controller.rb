@@ -45,12 +45,11 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    count_income = Income.where(is_deleted: false, group_id: @group.id).count
-    count_expense = Expense.where(is_deleted: false, group_id: @group.id).count
+    count_transaction = Transaction.where(group_id: @group.id).count
     count_product = Product.where(group_id: @group.id).count
-    count_user_group = UserGroup.where(group_id: @group.id).count
+    count_user_group = GroupMember.where(group_id: @group.id).count
 
-    if count_income == 0 && count_expense == 0 && count_product == 0 && count_user_group == 0
+    if count_transaction == 0 && count_product == 0 && count_user_group == 0
       @group.delete
       flash[:success] = t "model.group.message.deleted_success"
 

@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       page_index = params[:page].to_i
     end
 
-    user_groups = UserGroup.where(user_id: current_user.id)
+    user_groups = GroupMember.where(user_id: current_user.id)
     group_ids = []
     user_groups.each do |user_group|
       unless group_ids.include? user_group.group_id

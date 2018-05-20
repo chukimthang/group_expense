@@ -1,0 +1,42 @@
+<% content_for :ribbon do %>
+  <div id="ribbon">
+    <a href="/"><i class="fa fa-cogs fa-lg"></i></a>
+    <ol class="breadcrumb">
+      <li><a href="#"><%= t("common.form.administrator") %></a></li>
+      <li>
+        <a href="<%= data_files_path %>">
+          <%= t("model.data_file.model_name") %>
+        </a>
+      </li>
+      <li><%= t("common.form.list") %></li>
+    </ol>
+  </div>
+<% end %>
+
+<article class="col-sm-12 col-md-12 col-lg-12">
+  <div class="custom-widget">
+    <header role="heading">
+      <div class="col-xs-8 title">
+        <h5>
+          <%= t("model.data_file.title.list") %>
+        </h5>
+      </div>
+    </header>
+
+    <div class="wg-content">
+      <div class="row search-content" id="data-file-search">
+        <%= render "search" %>
+      </div>
+      <div class="row listing-container" id="list-data-file">
+        <%= render "list" %>
+      </div>
+    </div>
+  </div>
+</article>
+
+<% if @data_files.any? %>
+  <%= render "script_datatable" %>
+<% end %>
+
+<%= render "shared/deletion" %>
+<%= render "script" %>

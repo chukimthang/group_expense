@@ -1,0 +1,68 @@
+<%= form_for :data_file, :html=> {:id => "frm-search-file", :method => "GET", 
+  :enforce_utf8 => false, :class => "form-horizontal"} do |f| %>
+   <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :group_id, t("model.data.type.group_id"), class: "col-md-4 control-label" %>
+
+      <div class="col-md-6 custom-chosen">
+        <%= f.collection_select :groups, @groups, :id, :name.to_s,{prompt: false}, 
+          {class: "chosen-select form-control", name: "group_file_id", id: "group_id"} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :user_id, t("model.data.type.user_id"), class: "col-md-4 control-label" %>
+
+      <div class="col-md-6 custom-chosen">
+        <%= f.collection_select :user_id, @users, :id, :full_name.to_s,{prompt: false},
+          {class: "chosen-select form-control", name: "user_id", id: "user_id"} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :type_action_id, t("model.model.data_file.type.type_action_id"), 
+        class: "col-md-4 control-label" %>
+
+      <div class="col-md-6">
+        <%= f.select :type_action_id, @type_actions_search, {}, 
+          {class: "form-control", name: "type_action_id", id: "type_action_id"} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :from_date, t("model.transaction.label.from_date"), 
+        class: "col-md-4 control-label" %>
+
+      <div class="col-md-6">
+        <label class="input"><i class="icon-append fa fa-calendar"></i>
+          <%= f.text_field :from_date, {id: "start_date", name: "from_date",
+            class: "datepicker form-control validate[funcCall[isDate], dateRange[version_date]]", 
+            "data-dateformat" => "mm/dd/yy", placeholder: "MM/DD/YYYY", 
+            onchange: "hidenErrorDateRange('start_date', 'end_date');"} %>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :to_date, t("model.transaction.label.to_date"), 
+        class: "col-md-4 control-label" %>
+
+      <div class="col-md-6">
+        <label class="input"><i class="icon-append fa fa-calendar"></i>
+          <%= f.text_field :to_date, {name: "to_date", id: "end_date",
+            class: "datepicker form-control validate[funcCall[isDate], dateRange[version_date]]",
+            "data-dateformat" => "mm/dd/yy", placeholder: "MM/DD/YYYY", 
+            onchange: "hidenErrorDateRange('start_date', 'end_date');"} %>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-5 col-sm-offset-5">
+    <button type="button" class="btn custom-btn-green search"><%= t("common.form.search") %></button>
+    <button type="button" class="btn btn-default reset"><%= t("common.form.reset") %></button>
+  </div>
+<% end %>
+<div class="clearfix"></div>

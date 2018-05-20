@@ -49,4 +49,8 @@ Rails.application.routes.draw do
   resources :users, except: [:create, :show]
   post "users/create", to: "users#create"
   get "users/ajaxValidateFieldUser", to: "users#ckeck_user_exists_ajax", constraint: OnlyAjaxRequest.new
+
+  resources :data_files, only: [:index, :destroy], path: '/data-files' do
+    get "download", on: :member
+  end
 end

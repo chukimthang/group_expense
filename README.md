@@ -145,6 +145,9 @@ end
 **12. Export Excel Transaction**
 - Apply RubyXL export excel
 
+**13. Data File Management**
+- Delete and download file log
+
 ## Note
 #### JSON Javascript
 **1. JSON Object**

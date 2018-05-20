@@ -1,0 +1,81 @@
+<% content_for :scripts do %>
+  <script type="application/javascript">
+    $(document).ready(function() {
+      initChosen("group_id");
+      initChosen("user_id");
+      setParamsSearch();
+
+      $("#frm-search-file").validationEngine({
+        promptPosition: "inline",
+        addSuccessCssClassToField: "no-error",
+        addFailureCssClassToField: "has-error",
+        validateNonVisibleFields: true,
+        prettySelect : true,
+        useSuffix: "_chosen"
+      });
+
+      $(document).on("click", ".glyphicon-trash.glyphicon", function () {
+        var id = $(this).data('id');
+        document.getElementById("btn-confirm-delete").href = "/data-files/" + id
+      });
+
+      $("#frm-search-file").on("click", ".reset", function() {
+        resetSearch();
+      });
+
+      $("#frm-search-file").on("click", ".search", function() {
+        $("#frm-search-file").submit();
+      });
+    });
+
+    function resetSearch() {
+      $("#start_date").val("");
+      $("#end_date").val("");
+      $("#group_id").val(0);
+      $("#group_id").trigger("chosen:updated");
+      $("#user_id").val(0);
+      $("#user_id").trigger("chosen:updated");
+      $("#type_action_id").val(0);
+    }
+
+    function setParamsSearch() {
+      <% unless params[:from_date].blank? %>
+        var from_date = moment('<%= params[:from_date] %>').format('L');
+      <% else %>
+        var from_date = "";
+      <% end %>
+
+      <% unless params[:to_date].blank? %>
+        var to_date = moment('<%= params[:to_date] %>').format('L');
+      <% else %>
+        var to_date = "";
+      <% end %>
+
+      <% unless params[:type_action_id].blank? %>
+        var type_action_id = "<%= params[:type_action_id] %>";
+      <% else %>
+        var type_action_id = 0;
+      <% end %>
+
+      <% unless params[:group_file_id].blank? %>
+        var group_id = "<%= params[:group_file_id] %>";
+      <% else %>
+        var group_id = 0;
+      <% end %>
+
+      <% unless params[:user_id].blank? %>
+        var user_id = "<%= params[:user_id] %>";
+      <% else %>
+        var user_id = 0;
+      <% end %>
+
+      $("#group_id").val(group_id);
+      $("#group_id").trigger("chosen:updated");
+      $("#user_id").val(user_id);
+      $("#user_id").trigger("chosen:updated");
+      $("#type_action_id").val(type_action_id);
+      $("#start_date").val(from_date);
+      $("#end_date").val(to_date);
+    }
+  </script>
+<% end %>

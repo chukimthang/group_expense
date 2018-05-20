@@ -3,4 +3,5 @@ class Group < ApplicationRecord
 
   has_many :group_members
   has_many :transactions
+  has_many :data_files
 end
