@@ -134,19 +134,14 @@ end
 - Apply DATE_FORMAT in scope model (scope by_date by function search date)
 
 **11. Update charset migrate**
-- rails db:migration
-- rails db:seed
-
-- bin/rails db:environment:set RAILS_ENV=development
-- rails db:drop
-- rails db:setup
-- rails db:seed
 
 **12. Export Excel Transaction**
 - Apply RubyXL export excel
 
 **13. Data File Management**
 - Delete and download file log
+
+**14. Delete selected row with checkbox in Data File**
 
 ## Note
 #### JSON Javascript
@@ -169,4 +164,3 @@ x = myObj.cars[0];
 **4. JSON Stringify: Convert Object -> String**
 
 ```var myJSON = JSON.stringify(myObj);```
-

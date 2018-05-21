@@ -52,5 +52,6 @@ Rails.application.routes.draw do
 
   resources :data_files, only: [:index, :destroy], path: '/data-files' do
     get "download", on: :member
+    delete "destroy_multi", on: :collection, constraint: OnlyAjaxRequest.new
   end
 end

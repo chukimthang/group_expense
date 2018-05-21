@@ -1,17 +1,12 @@
+require 'json'
+
 class DataFilesController < ApplicationController
   include CommonHelper
 
   before_action :find_data_file, only: [:destroy, :download]
 
   def index
-    search_params
-    @data_files = DataFile.includes(:user).includes(:group)
-                                          .by_group(@group_id)
-                                          .by_type_action(@type_action_id)
-                                          .by_user(@user_id)
-                                          .by_date(@from_date, @to_date)
-                                          .order(created_at: :desc)
-    form_params
+    data_list
   end
 
   def destroy
@@ -32,14 +27,34 @@ class DataFilesController < ApplicationController
 
     if exist_file
       send_file(
-          path_to_file,
-          filename: "#{@data_file.file_name}",
-          type: "application/excel"
+        path_to_file,
+        filename: "#{@data_file.file_name}",
+        type: "application/excel"
       )
     else
       respond_to do |format|
         flash[:danger] = t "model.data_file.message.path_not_found"
         format.html {redirect_to data_files_url}
+      end
+    end
+  end
+
+  def destroy_multi
+    unless params[:data_file_ids].nil?
+      data_file_ids = JSON.parse(params[:data_file_ids])
+      # DataFile.where(:id => data_file_ids).destroy_all
+      
+      data_file_ids.each do |data_file_id|
+        data_file = DataFile.find_by_id data_file_id
+        path_to_file = "#{Rails.root}#{data_file.file_path}"
+        File.delete(path_to_file) if File.exist?(path_to_file)
+        data_file.delete
+      end
+
+      flash[:success] = t("model.data_file.message.deleted_success")
+
+      respond_to do |format|
+        format.json {render :json => {:status => "true"}}
       end
     end
   end
@@ -69,5 +84,16 @@ class DataFilesController < ApplicationController
     @to_date = to_date(params[:to_date]) unless params[:to_date].nil?
     @type_action_id = params[:type_action_id] ? params[:type_action_id].to_i : 0
     @user_id = params[:user_id] ? params[:user_id].to_i : 0
+  end
+
+  def data_list
+    search_params
+    @data_files = DataFile.includes(:user).includes(:group)
+                                          .by_group(@group_id)
+                                          .by_type_action(@type_action_id)
+                                          .by_user(@user_id)
+                                          .by_date(@from_date, @to_date)
+                                          .order(created_at: :desc)
+    form_params
   end
 end
