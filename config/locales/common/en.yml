@@ -22,6 +22,7 @@ en:
       reset: "Reset"
       export: "Export"
       download: "Download"
+      delete_multi_msg: "Are you sure to delete multi record?"
 
     home: "Home"
     message:
@@ -39,6 +40,7 @@ en:
     current_money: "Current Money: "
     success: "Success"
     group_blocked: "Group was blocked"
+    delete_selected: "Delete Selected Row"
 
     constant_js:
       validate_format_date: "* Please enter date in MM/dd/yyyy format."

@@ -26,6 +26,34 @@
       $("#frm-search-file").on("click", ".search", function() {
         $("#frm-search-file").submit();
       });
+
+      $("#delete-row-button").on("click", function() {
+        displayDialogDelete();
+      });
+
+      // set check all
+      $("#check-title").on("click", function() {
+        var isChecked = $(this).is(":checked");
+
+        $("#data-file-body input:checkbox").each(function () {
+          if(isChecked == true){
+            $(this).prop('checked', true);
+          }else{
+            $(this).prop('checked', false);
+          }
+        });
+      });
+
+      $(".row-check").on("change", function() {
+        var totalChecked = $("#data-file-body input:checkbox:checked").length;
+        var totalCheckbox = $("#data-file-body input:checkbox").length;
+        
+        if (totalChecked == totalCheckbox) {
+          $("#check-title").prop('checked', true);
+        } else {
+          $("#check-title").prop('checked', false);
+        }
+      });
     });
 
     function resetSearch() {
@@ -76,6 +104,60 @@
       $("#type_action_id").val(type_action_id);
       $("#start_date").val(from_date);
       $("#end_date").val(to_date);
+    }
+
+    function displayDialogDelete() {
+      $("#dialog-messages").dialog({
+        closeOnEscape: false,
+        open: function(event, ui) {
+          $("#lblmessages").html("<%= t('common.form.delete_multi_msg') %>");
+          $("#dialog-messages .alert").addClass("alert-warning");
+          $(".ui-dialog-titlebar-close", ui.dialog | ui)
+            .css("margin-top", "-10px")
+            .css("margin-right", "4px")
+            .css("color", "red");
+        },
+        width: 400,
+        modal: true,
+        buttons: [
+          {
+            id: "btnDelete",
+            text: "<%= t('common.form.delete') %>",
+            class: "btn btn-danger",
+            click: function () {
+              var data_file_ids = [];
+
+              $("#data-file-body input[type=checkbox]").each(function() {
+                if ($(this).is(":checked")) {
+                  data_file_ids.push($(this).data("id"));
+                }
+              });
+
+              url = "/data-files/destroy_multi?data_file_ids=[" + data_file_ids + "]";
+
+              $.ajax({
+                url: url,
+                cache: false,
+                type: "DELETE",
+                success: function (data) {
+                  if (data.status == "true") {
+                    window.location.replace("<%= data_files_path %>");
+                  }
+                }
+              });
+              $(this).dialog('close');
+            }
+          },
+          {
+            id: "btnCancel",
+            text: "<%= t('common.form.cancel') %>",
+            class: "btn btn-default",
+            click: function () {
+              $(this).dialog('close');
+            }
+          }
+        ]
+      });
     }
   </script>
 <% end %>

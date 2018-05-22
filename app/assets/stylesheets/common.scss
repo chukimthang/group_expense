@@ -184,7 +184,7 @@ span.label_check_product {
 }
 
 .ui-dialog.ui-corner-all.ui-widget.ui-widget-content {
-  top: 50px !important;
+  top: 200px !important;
 }
 
 #list_transaction .summary {
@@ -192,4 +192,8 @@ span.label_check_product {
   margin-top: 10px; 
   margin-bottom: 20px; 
   font-size: 15px;
+}
+
+#data-file-body .row-check {
+  margin-left: 12px;
 }

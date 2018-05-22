@@ -4,7 +4,7 @@
       no-footer display" id="table-data-file">
       <thead>
         <tr>
-          <th width="7%"><%= t("common.form.no") %></th>
+          <th width="7%" class="text-align-left"><input type="checkbox" id="check-title"></th>
           <th width="15%"><%= t("model.data_file.created_date") %></th>
           <th><%= t("model.data_file.type.file_name") %></th>
           <th><%= t("model.data_file.type.user_id") %></th>
@@ -14,14 +14,13 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody id="data-file-body">
         <% if @data_files.any? %>
-          <% @start_count = 1 %>
           <% created_date_array = [] %>
 
           <% @data_files.each do |data_file| %>
             <tr>
-              <td><%= @start_count %></td>
+              <td><input type="checkbox" data-id="<%= data_file.id %>" class="row-check"></td>
               <td><%= data_file.created_at.strftime("%m/%d/%Y") %></td>
               <td><a href="<%= download_data_file_path(:id => data_file.id) %>">
                 <%= data_file.file_name %></a></td>
@@ -30,7 +29,8 @@
               <td><%= data_file.type_action_id %></td>
               <td>
                 <a href="<%= download_data_file_path(:id => data_file.id) %>">
-                  <i class="glyphicon glyphicon-download-alt" data-toggle="tooltip" data-placement="top" title="<%= t("common.form.download") %>"></i>
+                  <i class="glyphicon glyphicon-download-alt" data-toggle="tooltip" 
+                    data-placement="top" title="<%= t("common.form.download") %>"></i>
                 </a>
 
                 <a href="#modal-deletion" class="data-file-delete" 
@@ -41,8 +41,6 @@
                 </a>
               </td>
             </tr>
-
-            <% @start_count += 1 %>
           <% end %>
         <% else %>
           <tr>
@@ -52,4 +50,13 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="col-md-12 row">
+  <a href="javascript:void(0)" class="btn custom-btn-green" id="delete-row-button"
+    data-toggle="modal">
+    <span data-toggle="tooltip" data-placement="right" title="<%= t("common.delete_selected") %>">
+      <%= t("common.form.delete") %>
+    </span>
+  </a>
 </div>
