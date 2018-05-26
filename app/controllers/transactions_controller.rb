@@ -2,7 +2,7 @@ require 'rubyXL'
 require 'fileutils'
 
 class TransactionsController < ApplicationController
-  include CommonHelper
+  include CommonHelper, RubyXL
 
   before_action :find_transaction, only: [:update, :destroy, :get_transaction_ajax]
 
@@ -94,6 +94,9 @@ class TransactionsController < ApplicationController
 
   def export
     list_transaction
+    @master_types = Transaction.type_ids
+    @group_members = GroupMember.includes(:group).includes(:user)
+                                .where(group_id: params[:group_id])
 
     file_path_template = "#{Rails.root.to_s}/files/templates/transaction.xlsx"
     template = RubyXL::Parser.parse(file_path_template)
@@ -101,24 +104,18 @@ class TransactionsController < ApplicationController
     #Parse file from template
     workbook = RubyXL::Parser.parse_buffer(template.stream.string)
     worksheet = workbook[0]
+    worksheet_master = workbook[1]
     template.worksheets.delete(template[0])
 
     row_index = 4
-    count = 1
+    worksheet.data_validations = RubyXL::DataValidations.new
+    formula_member = "=#{SHEET_MASTER_NAME}!$C$#{row_index + 1}:$C$#{row_index + @group_members.size}"
+    formula_type = "=#{SHEET_MASTER_NAME}!$H$#{row_index + 1}:$H$#{row_index + @master_types.size}"
+    worksheet.add_dropdown(4, 5, formula_member)
+    worksheet.add_dropdown(4, 6, formula_type)
 
-    fill_data_result worksheet, row_index
-
-    if @transactions.any?
-      @transactions.each do |transaction|
-        fill_data_row worksheet, row_index, transaction, count
-        row_index += 1
-        count += 1
-      end
-    end
-
-    (1..6).each do |col|
-      worksheet.change_column_horizontal_alignment(col, 'left')   
-    end
+    fill_data_sheet_transaction worksheet
+    fill_data_sheet_master worksheet_master
 
     export_file_name = "transaction_#{DateTime.now.strftime(FORMAT_DATE_FILE)}.xlsx"
     dir = "#{Rails.root.to_s}/tmp/files/export"
@@ -228,8 +225,62 @@ class TransactionsController < ApplicationController
   def add_border_to_cell sheet, row, col
     sheet.sheet_data[row][col].change_border(:bottom, 'thin')
     sheet.sheet_data[row][col].change_border(:left, 'thin')
-    if col == 6
+    if sheet.sheet_name == "Transaction" && col == 6
       sheet.sheet_data[row][col].change_border(:right, 'thin')
+    end
+
+    if sheet.sheet_name == "Master" 
+      if col == 3 || col == 7
+        sheet.sheet_data[row][col].change_border(:right, 'thin')
+      end
+    end
+  end
+
+  def fill_data_sheet_transaction worksheet
+    row_index = 4
+    count = 1
+
+    fill_data_result worksheet, row_index
+
+    if @transactions.any?
+      @transactions.each do |transaction|
+        fill_data_row worksheet, row_index, transaction, count
+        row_index += 1
+        count += 1
+      end
+    end
+
+    (1..6).each do |col|
+      worksheet.change_column_horizontal_alignment(col, 'left')   
+    end
+  end
+
+  def fill_data_sheet_master sheet_master
+    row_index = 4
+    @master_types.each {|key, value|
+      sheet_master.add_cell(row_index, 6, value)
+      sheet_master.change_column_horizontal_alignment(6, 'left')
+      add_border_to_cell sheet_master, row_index, 6
+
+      sheet_master.add_cell(row_index, 7, key)
+      add_border_to_cell sheet_master, row_index, 7
+
+      row_index += 1
+    }
+
+    row_index = 4
+    @group_members.each do |group_member|
+      sheet_master.add_cell(row_index, 1, group_member.user.id)
+      sheet_master.change_column_horizontal_alignment(1, 'left')
+      add_border_to_cell sheet_master, row_index, 1
+
+      sheet_master.add_cell(row_index, 2, group_member.user.full_name)
+      add_border_to_cell sheet_master, row_index, 2
+
+      sheet_master.add_cell(row_index, 3, group_member.user.email)
+      add_border_to_cell sheet_master, row_index, 3
+
+      row_index += 1
     end
   end
 end

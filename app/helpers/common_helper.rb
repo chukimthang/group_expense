@@ -3,6 +3,7 @@ module CommonHelper
   FORMAT_DATE = "%m/%d/%Y"
   FORMAT_DATE_DB = "%Y-%m-%d"
   FORMAT_DATE_FILE = "%m-%d-%Y-%H%M%S"
+  SHEET_MASTER_NAME = "Master"
 
   # convert string to datetime
   def to_date(str_date)
@@ -65,5 +66,24 @@ module CommonHelper
        type_action_id: type_action_id
     })
     DataFile.create(data_file)
+  end
+end
+
+# https://github.com/weshatheleopard/rubyXL/issues/224
+module RubyXL
+  module WorksheetConvenienceMethods
+    def add_dropdown(row, col, content_list=nil, title=nil, prompt=nil)
+      formula = RubyXL::Formula.new(expression: content_list)
+      loc = if content_list
+              RubyXL::Reference.new(row, 1048000, col, col)
+            else
+              RubyXL::Reference.new(row, col)
+            end
+      val = RubyXL::DataValidation.new(prompt_title: title, prompt: prompt,
+                                       sqref: loc, formula1: content_list ? formula : nil,
+                                       type: content_list ? 'list' : nil, show_input_message: true)
+      self.data_validations << val
+    end
+    alias_method :add_hint, :add_dropdown
   end
 end
