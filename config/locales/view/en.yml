@@ -1,9 +1,0 @@
-en:
-  view:
-    message:
-      not_found: '%{resource} not found'
-      add_success: '%{resource} was successfully created.'
-      update_success: '%{resource} was successfully updated'
-      deleted_success: '%{resource} was successfully deleted.'
-      not_delete: "Not Delete"
-
