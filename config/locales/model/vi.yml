@@ -1,0 +1,136 @@
+vi:
+  model:
+    category:
+      model_name: "Danh mục"
+      controller_name: "Danh mục"
+      type:
+        name: "Tên"
+        created_at: "Tạo ngày"
+      title:
+        add: "Thêm danh mục"
+        update: "Sửa danh mục"
+      message:
+        not_found: "Không tìm thấy danh mục"
+        add_success: "Danh mục đã được tạo thành công"
+        update_success: "Danh mục đã được sửa thành công"
+        deleted_success: "Danh mục đã được xóa thành công"
+        
+    product:
+      model_name: "Sản phẩm"
+      controller_name: "Sản phẩm"
+      type:
+        name: "Tên sản phẩm"
+        category_id: "Danh mục"
+        is_shared: "Chia sẻ"
+      title:
+        list: "Danh sách sản phẩm"
+        add: "Thêm sản phẩm"
+        update: "Sửa sản phẩm"
+      message:
+        not_found: "Không tìm thấy sản phẩm"
+        add_success: "Sản phẩm đã được thêm thành công"
+        update_success: "Sản phẩm đã được sửa thành công"
+        deleted_success: "Sản phẩm đã được xóa thành công"
+
+    group:
+      model_name: "Nhóm"
+      controller_name: "Nhóm"
+      type:
+        name: "Tên nhóm"
+        created_at: "Tạo ngày"
+      title:
+        list: "Danh sách nhóm"
+        add: "Thêm nhóm"
+        update: "Sửa nhóm"
+      message:
+        not_found: "Không tìm thấy nhóm"
+        add_success: "Nhóm đã được tạo thành công"
+        update_success: "Nhóm đã được sửa thành công"
+        deleted_success: "Nhóm đã được xóa thành công"
+
+    user:
+      model_name: "Người dùng"
+      controller_name: "Người dùng"
+      type:
+        email: "Email"
+        is_admin: "Quản trị"
+        created_at: "Tạo ngày"
+        password: "Mật khẩu"
+        password_confirm: "Xác nhận mật khẩu" 
+        full_name: "Họ tên"
+        birthday: "Ngày sinh"
+        user_type: "Loại tài khoản"
+        normal_user: "Tài khoản thường"
+        descript: "Mô tả"
+      title:
+        list: "Danh sách người dùng"
+        create: "Tạo tài khoản"
+      message:
+        not_found: "Không tìm thấy người dùng"
+        add_success: "Người dùng đã được tạo"
+
+    group_member:
+      model_name: "Thành viên nhóm"
+      controller_name: "Thành viên nhóm"
+      type:
+        group_id: "Nhóm"
+        created_at: "Tham gia ngày"
+      label:
+        member: "Thành viên"
+        enter_member: "Nhập thành viên"
+        enter_email: "Nhập email"
+      title:
+        list: "Danh sách thành viên"
+        add: "Thêm thành viên"
+      message:
+        not_found: "Không tìm thấy thành viên"
+        add_success: "Thành viên đã được thêm thành công"
+        deleted_success: "Thành viên đã được xóa thành công"
+
+    transaction:
+      model_name: "Thu chi"
+      controller_name: "Thu chi"
+      type:
+        created_at: "Ngày"
+        amount: "Số tiền"
+        description: "Mô tả"
+        category_id: "Danh mục"
+        type_id: "Loại"
+        update_by_user: "Người tạo"
+        list_type: 
+          expense: Chi
+          income: Thu
+          saved: "Còn lại"
+      title:
+        list: "Danh sách thu chi"
+        add: "Thêm Thu Chi"
+        update: "Update Thu Chi"
+        delete: "Delete Thu Chi"
+      label:
+        choose_product: "Chọn sản phẩm"
+        from_date: "Từ ngày"
+        to_date: "Đến ngày" 
+      message:
+        not_found: "Không tìm thấy giao dịch"
+        add_success: "Giao dịch đã được thêm thành công"
+        update_success: "Giao dịch đã được sửa thành công"
+        deleted_success: "Giao dịch đã được xóa thành công"
+
+    data_file:
+      model_name: "Dữ liệu file"
+      controller_name: "Dữ liệu file"
+      type:
+        file_name: "Tên file"
+        file_path: "Đường dẫn file"
+        user_id: "Người dùng"
+        group_id: "Nhóm"
+        type_action_id: "Loại hoạt động"
+        created_at: "Tạo ngày"
+      title:
+        list: "Danh sách file"
+        delete: "Xóa file"
+      message:
+        not_found: "Không tìm thấy file"
+        path_not_found: "Không tìm thấy đường dẫn file"
+        deleted_success: "File đã được xóa thành công"
+

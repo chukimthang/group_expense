@@ -1,0 +1,47 @@
+vi:
+  common:
+    form:
+      list: "Danh sách"
+      add: "Thêm"
+      update: "Sửa"
+      search: "Tìm kiếm"
+      cancel: "Hủy"
+      delete: "Xóa"
+      create: "Tạo"
+      resource_list: "%{resource} Danh sách"
+      all_selection: "-- Toàn bộ --"
+      total_records: "Tổng số bản ghi: %{amount}"
+      items_per_page: "Số bản ghi hiển thị"
+      action: "Thao tác"
+      delete_record: "Xóa bản ghi"
+      delete_confirm_msg: "Bạn có chắc chắn muốn xóa bản ghi này?"
+      add_resource: "Thêm %{resource}"
+      error: "Lỗi"
+      notification_box_title: "Cảnh báo!"
+      choose: " -- Chọn -- "
+      reset: "Trả lại"
+      export: "Xuất"
+      download: "Tải về"
+      delete_multi_msg: "Bạn có chắc chắn muốn xóa những bản ghi này?"
+
+    home: "Trang chủ"
+    message:
+    menu:
+      administration: "Quản trị"
+      utility: "Tiện ích"
+    table:
+      empty: "Bảng trống"
+
+    yes: "Có"
+    no: "Không"
+    actived: "Đã hoạt động"
+    active: "Hoạt động"
+    inactived: "Không hoạt động"
+    current_money: "Số tiền hiện tại: "
+    success: "Thành công"
+    group_blocked: "Nhóm đã bị khóa"
+    delete_selected: "Xóa bản ghi đã chọn"
+
+    constant_js:
+      validate_format_date: "* Mời bạn nhập ngày theo định dạng MM/dd/yyyy."
+      validate_password_message: "* Mật khẩu không khớp"
