@@ -41,6 +41,7 @@ vi:
     success: "Thành công"
     group_blocked: "Nhóm đã bị khóa"
     delete_selected: "Xóa bản ghi đã chọn"
+    not_delete: "Không được xóa"
 
     constant_js:
       validate_format_date: "* Mời bạn nhập ngày theo định dạng MM/dd/yyyy."
