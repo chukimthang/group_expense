@@ -68,7 +68,7 @@ class CategoriesController < ApplicationController
         format.html { redirect_to group_categories_path }
       end
     else
-      flash[:danger] = t "view.message.not_delete"
+      flash[:danger] = t "common.not_delete"
 
       respond_to do |format|
         format.html { redirect_to group_categories_path }
