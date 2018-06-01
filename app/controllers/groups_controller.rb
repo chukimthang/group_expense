@@ -49,7 +49,7 @@ class GroupsController < ApplicationController
     count_product = Product.where(group_id: @group.id).count
     count_user_group = GroupMember.where(group_id: @group.id).count
 
-    if count_transaction == 0 && count_product == 0 && count_user_group == 0
+    if count_transaction == 0 && count_product == 0 && count_user_group < 2
       @group.delete
       flash[:success] = t "model.group.message.deleted_success"
 
@@ -57,7 +57,7 @@ class GroupsController < ApplicationController
         format.html { redirect_to root_path }
       end
     else
-      flash[:danger] = t "view.message.not_delete"
+      flash[:danger] = t "common.not_delete"
 
       respond_to do |format|
         format.html { redirect_to root_path }

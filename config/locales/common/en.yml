@@ -41,6 +41,7 @@ en:
     success: "Success"
     group_blocked: "Group was blocked"
     delete_selected: "Delete Selected Row"
+    not_delete: "Not Delete"
 
     constant_js:
       validate_format_date: "* Please enter date in MM/dd/yyyy format."
