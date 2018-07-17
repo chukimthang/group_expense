@@ -1,6 +1,8 @@
 require 'json'
 
 class GroupMembersController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @group_members = GroupMember.includes(:group).includes(:user)
                                 .where(group_id: params[:group_id])

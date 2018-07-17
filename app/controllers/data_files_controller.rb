@@ -3,6 +3,7 @@ require 'json'
 class DataFilesController < ApplicationController
   include CommonHelper
 
+  load_and_authorize_resource
   before_action :find_data_file, only: [:destroy, :download]
 
   def index

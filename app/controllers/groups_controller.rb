@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  load_and_authorize_resource
   before_action :find_group, only: [:update, :destroy, :get_group_ajax, :post_group_blocked_ajax]
 
   def create

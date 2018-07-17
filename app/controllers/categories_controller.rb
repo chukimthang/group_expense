@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  load_and_authorize_resource
   before_action :find_category, only: [:update, :destroy, :get_category_ajax]
 
   def index
