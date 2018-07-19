@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   include CommonHelper
-
+  load_and_authorize_resource
   before_action :find_product, only: [:update, :destroy, :get_product_ajax]
 
   def index

@@ -22,12 +22,10 @@
       </div>
 
       <div class="col-xs-4">
-        <% if current_user.is_admin %>
-          <span class="btn custom-btn-green btn-add pull-right category_add" 
-            data-toggle="modal" data-target="#category_form">
-            <%= t("common.form.add") %>
-          </span>
-        <% end %>
+        <span class="btn custom-btn-green btn-add pull-right category_add" 
+          data-toggle="modal" data-target="#category_form">
+          <%= t("common.form.add") %>
+        </span>
       </div>
     </header>
 

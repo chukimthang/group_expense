@@ -59,7 +59,7 @@ user_groups.push(
   {id: 3, user_id: 3, group_id: 1},
   {id: 4, user_id: 4, group_id: 1}
 )
-UserGroup.create(user_groups)
+GroupMember.create(user_groups)
 
 transactions = Array.new
 (0..1000).each do |i|

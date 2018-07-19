@@ -5,6 +5,62 @@
 - Create controller: rails generate controller Categories
 - Add column table db: rails generate migration add_is_deleted_to_categories is_deleted:boolean
 
+## Content
+**1. Static page**
+- Custom theme admin
+
+**2. Init model**
+
+**3. Manage category**
+- Add and remove column migration
+- Apply ajax and use popup
+- Use validate model and jQuery-Validation-Engine
+
+**4. Manage product**
+- Apply chosen-rails
+- Scope in model
+- Create common class GroupItem
+
+**5. Change routes**
+- Use routes member
+
+**6. Listing user**
+- Apply sortable in table
+
+**7. Create user**
+- Use form field: email_field, password_field, text_field , radio_button, text_area
+- Apply plugin markdown in text_area
+- Apply jQuery-Validation-Engine: funcCall, ajax
+
+**8. Add Group member**
+- Apply Bootstrap Tags Input
+- User hidden field with value = []
+- User JSON Javascript
+
+**9. Listing transaction**
+- Apply dataTable
+- Drop table with migration
+
+**10. Add Update Delete Transaction**
+- Apply moment js
+- Load view by ajax
+- Use event js with onChange
+- Apply DATE_FORMAT in scope model (scope by_date by function search date)
+
+**11. Update charset migrate**
+
+**12. Export Excel Transaction**
+- Apply RubyXL export excel
+
+**13. Data File Management**
+- Delete and download file log
+
+**14. Delete selected row with checkbox in Data File**
+
+**15. Create selectbox excel and sheet master (rubyxl)**
+
+**16. Apply gem Cancancan**
+
 ## Deploy Heroku
 **1. Install CLI**
 - Run command: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
@@ -91,59 +147,8 @@ end
 **6. RubyXL**
 - https://github.com/weshatheleopard/rubyXL
 
-## Content
-**1. Static page**
-- Custom theme admin
-
-**2. Init model**
-
-**3. Manage category**
-- Add and remove column migration
-- Apply ajax and use popup
-- Use validate model and jQuery-Validation-Engine
-
-**4. Manage product**
-- Apply chosen-rails
-- Scope in model
-- Create common class GroupItem
-
-**5. Change routes**
-- Use routes member
-
-**6. Listing user**
-- Apply sortable in table
-
-**7. Create user**
-- Use form field: email_field, password_field, text_field , radio_button, text_area
-- Apply plugin markdown in text_area
-- Apply jQuery-Validation-Engine: funcCall, ajax
-
-**8. Add Group member**
-- Apply Bootstrap Tags Input
-- User hidden field with value = []
-- User JSON Javascript
-
-**9. Listing transaction**
-- Apply dataTable
-- Drop table with migration
-
-**10. Add Update Delete Transaction**
-- Apply moment js
-- Load view by ajax
-- Use event js with onChange
-- Apply DATE_FORMAT in scope model (scope by_date by function search date)
-
-**11. Update charset migrate**
-
-**12. Export Excel Transaction**
-- Apply RubyXL export excel
-
-**13. Data File Management**
-- Delete and download file log
-
-**14. Delete selected row with checkbox in Data File**
-
-**15. Create selectbox excel and sheet master (rubyxl)**
+**7. Cancancan**
+- https://github.com/CanCanCommunity/cancancan
 
 ## Note
 #### JSON Javascript

@@ -4,6 +4,7 @@ require 'fileutils'
 class TransactionsController < ApplicationController
   include CommonHelper, RubyXL
 
+  load_and_authorize_resource
   before_action :find_transaction, only: [:update, :destroy, :get_transaction_ajax]
 
   def index

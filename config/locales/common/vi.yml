@@ -42,6 +42,7 @@ vi:
     group_blocked: "Nhóm đã bị khóa"
     delete_selected: "Xóa bản ghi đã chọn"
     not_delete: "Không được xóa"
+    not_auth: "Bạn không có quyền truy cập"
 
     constant_js:
       validate_format_date: "* Mời bạn nhập ngày theo định dạng MM/dd/yyyy."

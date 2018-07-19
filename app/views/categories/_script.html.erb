@@ -18,21 +18,31 @@
       <% end %>
 
       $(".category_add").on("click", function() {
-        resetForm();
-        $("#category_form_title").html("<%= t('model.category.title.add') %>");
-        $("#category_form_button").html("<%= t('common.form.add') %>");
+        <% if can? :create, Category %>
+          resetForm();
+          $("#category_form_title").html("<%= t('model.category.title.add') %>");
+          $("#category_form_button").html("<%= t('common.form.add') %>");
+        <% else %>
+          $(this).removeAttr("data-toggle");
+          alert("<%= t('common.not_auth') %>");
+        <% end %>
       });
 
       $(".category_edit").on("click", function() {
-        resetForm();
-        $("#category_form_title").html("<%= t('model.category.title.update') %>");
-        $("#category_form_button").html("<%= t('common.form.update') %>");
+        <% if can? :update, Category %>
+          resetForm();
+          $("#category_form_title").html("<%= t('model.category.title.update') %>");
+          $("#category_form_button").html("<%= t('common.form.update') %>");
 
-        var id = $(this).data("id");
-        showFormEdit(id);
+          var id = $(this).data("id");
+          showFormEdit(id);
 
-        $("#category_form_button").data("category-id", id);
-        currentScreen = "update"
+          $("#category_form_button").data("category-id", id);
+          currentScreen = "update"
+        <% else %>
+          $(this).removeAttr("data-toggle");
+          alert("<%= t('common.not_auth') %>");
+        <% end %>
       });
 
       $("#category_form_button").on("click", function() {
@@ -40,8 +50,13 @@
       });
 
       $(document).on("click", ".glyphicon-trash.glyphicon", function () {
-        var id = $(this).data('id');
-        document.getElementById("btn-confirm-delete").href = "/groups/" + group_id + "/categories/" + id
+        <% if can? :destroy, Category %>
+          var id = $(this).data('id');
+          document.getElementById("btn-confirm-delete").href = "/groups/" + group_id + "/categories/" + id
+        <% else %>
+          $(".glyphicon-trash.glyphicon").parents().removeAttr("data-toggle").attr("href", "javascript:void(0)");
+          alert("<%= t('common.not_auth') %>");
+        <% end %>
       });
     });
 

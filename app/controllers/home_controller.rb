@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  skip_authorization_check only: :index
+
   def index
     per_page = params[:per_page] ? params[:per_page].to_i : Group::PAGE_SIZE
     page_index = 1
