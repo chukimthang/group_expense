@@ -1,0 +1,44 @@
+<div class="table-responsive">
+  <table class="custom-table table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="col-sm-1"><%= t("common.form.no") %></th>
+        <th class="col-sm-10"><%= t("model.product_category.type.name") %></th>
+        <th class="col-sm-1"><%= t("common.form.action") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @start_count = 1 %>
+
+      <% if @product_categories.any? %>
+        <% @product_categories.each do |product_category| %>
+          <% ancestors = product_category.get_ancestors %>
+          <% ancestors.each do |a| %>
+            <% indent = " |---  " * a[0] %>
+            <tr>
+              <td><%= @start_count %></td>
+              <td><%= indent + a[1].name %></td>
+              <td>
+                <a href="javascript:void(0)">
+                  <i class="fa fa-pencil-square-o custom-action-icon-green
+                    custom-action-icon-edit">
+                  </i>
+                </a>
+
+                <a href="#modal-deletion">
+                  <i class="glyphicon glyphicon-trash glyphicon"></i>
+                </a>
+              </td>
+            </tr>
+            <% @start_count += 1 %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" align="center"><%= t("common.table.empty") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

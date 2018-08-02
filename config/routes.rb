@@ -54,4 +54,6 @@ Rails.application.routes.draw do
     get "download", on: :member
     delete "destroy_multi", on: :collection, constraint: OnlyAjaxRequest.new
   end
+
+  resources :product_categories
 end

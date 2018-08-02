@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520081524) do
+ActiveRecord::Schema.define(version: 20180802094222) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "name", null: false
@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(version: 20180520081524) do
     t.datetime "updated_at", null: false
     t.boolean "is_deleted", default: false
     t.integer "create_by_user", null: false
+  end
+
+  create_table "product_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.string "name", null: false
+    t.integer "parent_id"
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|

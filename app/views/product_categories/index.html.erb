@@ -1,0 +1,56 @@
+<% content_for :ribbon do %>
+  <div id="ribbon">
+    <a href="<%= root_path %>"><i class="fa fa-lg fa-fw fa-home"></i></a>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= product_categories_path %>">
+          <%= t("model.category.model_name") %>
+        </a>
+      </li>
+      <li><%= t("common.form.list") %></li>
+    </ol>
+  </div>
+<% end %>
+
+<article class="col-sm-12 col-md-12 col-lg-12">
+  <div class="custom-widget">
+    <header role="heading">
+      <div class="col-xs-8 title">
+        <h5>
+          <%= t("model.product_category.model_name") %>
+        </h5>
+      </div>
+
+      <div class="col-xs-4">
+        <span class="btn custom-btn-green btn-add pull-right category_add" 
+          data-toggle="modal" data-target="#category_form">
+          <%= t("common.form.add") %>
+        </span>
+      </div>
+    </header>
+
+    <div class="wg-content">
+      <div class="row listing-container">
+        <div class="row content-header">
+          <div class="col-sm-4 pull-left total_records">
+            <%= t("common.form.total_records", amount: @total_records) %>
+          </div>
+
+          <div class="col-sm-4 pull-right">
+            <div class="row items_per_page">
+              <div class="col-sm-8 text-align-right label-middle">
+                <%= t("common.form.items_per_page") %>
+              </div>
+
+              <div class="col-sm-4 pull-right wp-pagesize">
+                <%= render "shared/pagesize" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%= render "list" %>
+    </div>
+  </div>
+</article>
