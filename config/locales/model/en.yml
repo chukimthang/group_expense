@@ -133,3 +133,10 @@ en:
         not_found: "File not found"
         path_not_found: "Filepath not found"
         deleted_success: "File was successfully deleted"
+
+    product_category:
+      model_name: "Product Category"
+      controller_name: "Product Categories"
+      type:
+        name: "Name"
+        parent_id: "Parent Category"

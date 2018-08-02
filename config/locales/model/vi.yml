@@ -134,3 +134,9 @@ vi:
         path_not_found: "Không tìm thấy đường dẫn file"
         deleted_success: "File đã được xóa thành công"
 
+    product_category:
+      model_name: "Danh mục sản phẩm"
+      controller_name: "Danh mục sản phẩm"
+      type:
+        name: "Tên"
+        parent_id: "Danh mục cha"

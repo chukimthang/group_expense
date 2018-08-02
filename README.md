@@ -61,6 +61,8 @@
 
 **16. Apply gem Cancancan**
 
+**17. Rails Parent/Child Relationship - Listing Product Category**
+
 ## Deploy Heroku
 **1. Install CLI**
 - Run command: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
@@ -171,3 +173,7 @@ x = myObj.cars[0];
 **4. JSON Stringify: Convert Object -> String**
 
 ```var myJSON = JSON.stringify(myObj);```
+
+## Document Other
+- Rails Parent/Child Relationship: https://www.kbarrett.com/blog/2013/05/28/rails-parent-child.html
+
