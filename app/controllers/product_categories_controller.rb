@@ -5,12 +5,4 @@ class ProductCategoriesController < ApplicationController
     @product_categories = ProductCategory.where(parent_id: nil)
     @total_records = ProductCategory.count
   end
-
-  def new
-    
-  end
-
-  def create
-    
-  end
 end
