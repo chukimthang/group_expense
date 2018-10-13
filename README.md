@@ -91,7 +91,7 @@
 - Run command: heroku create (create app + database + add remote)
 
 **6. Add remote heroku (if execute method 5.1)**
-- Run command: heroku git:clone -a sochitieu
+- Run command: heroku git:remote -a sochitieu
 - Check: git remote -v
 
 **7. Update gem file**
@@ -104,7 +104,7 @@ end
 ```
 - Add gem gem 'pg' and gem 'rails_12factor' to
 ```
-group :production
+group :production do
   gem 'pg'
   gem 'rails_12factor'  
 end
